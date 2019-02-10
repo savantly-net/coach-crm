@@ -1,0 +1,24 @@
+{
+    "coachApp": {
+        "contactPhone": {
+            "home": {
+                "title": "Contact Phones",
+                "createLabel": "కొత్త Contact Phone  సృష్టించండి",
+                "createOrEditLabel": "Contact Phone సృష్టించండి లేదా సవరించండి",
+                "search": "Contact Phone కొరకు శోధించండి"
+            },
+            "created": "{{ param }} ఐడీ తో ఒక కొత్త Contact Phone సృష్టించబడినది",
+            "updated": "{{ param }} ఐడీ తో ఒక కొత్త Contact Phone సవరించబడినది",
+            "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Contact Phone తొలగించబడినది",
+            "delete": {
+                "question": "మీరు Contact Phone {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+            },
+            "detail": {
+                "title": "Contact Phone"
+            },
+            "number": "Number",
+            "sms": "Sms",
+            "contact": "Contact"
+        }
+    }
+}

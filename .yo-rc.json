@@ -1,37 +1,47 @@
 {
-    "generator-jhipster": {
-        "promptValues": {
-            "packageName": "net.savantly.coach",
-            "nativeLanguage": "en"
-        },
-        "jhipsterVersion": "5.8.1",
-        "applicationType": "monolith",
-        "baseName": "coach",
-        "packageName": "net.savantly.coach",
-        "packageFolder": "net/savantly/coach",
-        "serverPort": "8080",
-        "authenticationType": "oauth2",
-        "cacheProvider": "ehcache",
-        "enableHibernateCache": true,
-        "websocket": "spring-websocket",
-        "databaseType": "sql",
-        "devDatabaseType": "h2Disk",
-        "prodDatabaseType": "mysql",
-        "searchEngine": "elasticsearch",
-        "messageBroker": false,
-        "serviceDiscoveryType": false,
-        "buildTool": "maven",
-        "enableSwaggerCodegen": false,
-        "clientFramework": "angularX",
-        "useSass": true,
-        "clientPackageManager": "npm",
-        "testFrameworks": ["cucumber", "protractor"],
-        "jhiPrefix": "jhi",
-        "entitySuffix": "",
-        "dtoSuffix": "DTO",
-        "otherModules": [],
-        "enableTranslation": true,
-        "nativeLanguage": "en",
-        "languages": ["en", "es", "te"]
-    }
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "net.savantly.coach",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "5.8.1",
+    "applicationType": "monolith",
+    "baseName": "coach",
+    "packageName": "net.savantly.coach",
+    "packageFolder": "net/savantly/coach",
+    "serverPort": "8080",
+    "authenticationType": "oauth2",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "cucumber",
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "es",
+      "te"
+    ]
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
+  }
 }

@@ -1,12 +1,21 @@
 {
     "global": {
         "title": "Coach",
-        "browsehappy": "మీది <strong>కాలం చెల్లిన</strong> బ్రౌజరు. దయచేసి <a href=\"http://browsehappy.com/?locale=en\">నవీకరణ చేసుకోండి</a> ",
+        "browsehappy":
+            "మీది <strong>కాలం చెల్లిన</strong> బ్రౌజరు. దయచేసి <a href=\"http://browsehappy.com/?locale=en\">నవీకరణ చేసుకోండి</a> ",
         "menu": {
             "home": "ఇల్లు",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "ఎంటిటీలు",
+                "contactPhone": "Contact Phone",
+                "contactEmail": "Contact Email",
+                "address": "Address",
+                "site": "Site",
+                "contact": "Contact",
+                "upload": "Upload",
+                "fieldServiceType": "Field Service Type",
+                "fieldServiceRequest": "Field Service Request",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -29,6 +38,7 @@
                 "audits": "తనిఖీలు",
                 "apidocs": "API",
                 "database": "డేటాబేస్",
+                "entity-audit": "Entity Audit",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
             "language": "భాష"
@@ -50,7 +60,8 @@
                 "authenticated": {
                     "prefix": "మీరు కావాలంటే",
                     "link": "సైన్ ఇన్ ",
-                    "suffix": ", ఈ ఖాతా లు వాడుకోవచ్చు:<br/>- పెత్తందారి (login=\"admin\" and password=\"admin\") <br/>- సాధారణ ఉపయోక్త (login=\"user\" and password=\"user\")."
+                    "suffix":
+                        ", ఈ ఖాతా లు వాడుకోవచ్చు:<br/>- పెత్తందారి (login=\"admin\" and password=\"admin\") <br/>- సాధారణ ఉపయోక్త (login=\"user\" and password=\"user\")."
                 },
                 "register": {
                     "noaccount": "మీకు ఖాతా లేదా?",

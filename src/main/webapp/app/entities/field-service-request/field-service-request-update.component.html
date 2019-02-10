@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-field-service-request-heading" jhiTranslate="coachApp.fieldServiceRequest.home.createOrEditLabel">Create or edit a Field Service Request</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!fieldServiceRequest.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="fieldServiceRequest.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" [(ngModel)]="fieldServiceRequest.status" id="field_status" >
+                        <option value="PROPOSAL">{{'coachApp.FieldServiceStatus.PROPOSAL' | translate}}</option>
+                        <option value="CONTRACT">{{'coachApp.FieldServiceStatus.CONTRACT' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.contractDate" for="field_contractDate">Contract Date</label>
+                    <div class="input-group">
+                        <input id="field_contractDate" type="text" class="form-control" name="contractDate" ngbDatepicker  #contractDateDp="ngbDatepicker" [(ngModel)]="fieldServiceRequest.contractDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="contractDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.startDate" for="field_startDate">Start Date</label>
+                    <div class="input-group">
+                        <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="fieldServiceRequest.startDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.finishDate" for="field_finishDate">Finish Date</label>
+                    <div class="input-group">
+                        <input id="field_finishDate" type="text" class="form-control" name="finishDate" ngbDatepicker  #finishDateDp="ngbDatepicker" [(ngModel)]="fieldServiceRequest.finishDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="finishDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="fieldServiceRequest.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.total" for="field_total">Total</label>
+                    <input type="number" class="form-control" name="total" id="field_total"
+                        [(ngModel)]="fieldServiceRequest.total" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.requestor" for="field_requestor">Requestor</label>
+                    <select class="form-control" id="field_requestor" name="requestor" [(ngModel)]="fieldServiceRequest.requestor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contactOption.id === fieldServiceRequest.requestor?.id ? fieldServiceRequest.requestor : contactOption" *ngFor="let contactOption of requestors; trackBy: trackContactById">{{contactOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.fieldServiceRequest.fieldServiceType" for="field_fieldServiceType">Field Service Type</label>
+                    <select class="form-control" id="field_fieldServiceType" name="fieldServiceType" [(ngModel)]="fieldServiceRequest.fieldServiceType" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fieldServiceTypeOption.id === fieldServiceRequest.fieldServiceType?.id ? fieldServiceRequest.fieldServiceType : fieldServiceTypeOption" *ngFor="let fieldServiceTypeOption of fieldservicetypes; trackBy: trackFieldServiceTypeById">{{fieldServiceTypeOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

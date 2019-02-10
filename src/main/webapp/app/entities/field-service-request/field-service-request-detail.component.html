@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fieldServiceRequest">
+            <h2><span jhiTranslate="coachApp.fieldServiceRequest.detail.title">Field Service Request</span> {{fieldServiceRequest.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'coachApp.FieldServiceStatus.' + fieldServiceRequest.status}}">{{fieldServiceRequest.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.contractDate">Contract Date</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.contractDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.startDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.finishDate">Finish Date</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.finishDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.description">Description</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.total">Total</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.total}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.requestor">Requestor</span></dt>
+                <dd>
+                    <div *ngIf="fieldServiceRequest.requestor">
+                        <a [routerLink]="['/contact', fieldServiceRequest.requestor?.id, 'view']">{{fieldServiceRequest.requestor?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.fieldServiceType">Field Service Type</span></dt>
+                <dd>
+                    <div *ngIf="fieldServiceRequest.fieldServiceType">
+                        <a [routerLink]="['/field-service-type', fieldServiceRequest.fieldServiceType?.id, 'view']">{{fieldServiceRequest.fieldServiceType?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/field-service-request', fieldServiceRequest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

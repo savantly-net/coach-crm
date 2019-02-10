@@ -1,0 +1,88 @@
+enum ContactStatus {
+	LEAD,
+    CLIENT
+}
+
+entity ContactPhone {
+	number String,
+    sms Boolean
+}
+
+entity ContactEmail {
+	address String,
+    confirmed Boolean,
+    primary Boolean
+}
+
+entity Address {
+	street String,
+    city String,
+    state String,
+    zipcode String,
+    country String
+}
+
+entity Site {
+	name String,
+    phoneNumber String,
+    altPhoneNumber String,
+    fax String,
+    website String,
+    industry String
+}
+
+entity Contact {
+	firstName String,
+    lastName String,
+    dob LocalDate,
+    status ContactStatus,
+    companyName String,
+    jobRole String,
+    position String,
+    linkedIn String,
+    fax String,
+    department String
+}
+
+entity Upload {
+	name String,
+    description String,
+    file AnyBlob
+}
+
+enum FieldServiceStatus {
+	PROPOSAL,
+    CONTRACT
+}
+
+entity FieldServiceType {
+	name String,
+	description String
+}
+
+entity FieldServiceRequest {
+	status FieldServiceStatus,
+    contractDate LocalDate,
+    startDate LocalDate,
+    finishDate LocalDate,
+    description String,
+    total Double
+}
+
+entity User
+
+relationship OneToMany {
+	Contact{phoneNumbers} to ContactPhone,
+    Contact{emailAddresses} to ContactEmail,
+    FieldServiceType to FieldServiceRequest
+    FieldServiceRequest{documents} to Upload
+}
+
+relationship OneToOne {
+	Site{primaryContact} to Contact,
+    Site{otherContacts} to Contact,
+    Contact to Address,
+    Site to Address
+    FieldServiceRequest{requestor} to Contact
+}
+

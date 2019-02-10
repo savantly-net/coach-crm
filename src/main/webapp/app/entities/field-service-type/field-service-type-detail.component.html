@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fieldServiceType">
+            <h2><span jhiTranslate="coachApp.fieldServiceType.detail.title">Field Service Type</span> {{fieldServiceType.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="coachApp.fieldServiceType.name">Name</span></dt>
+                <dd>
+                    <span>{{fieldServiceType.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceType.description">Description</span></dt>
+                <dd>
+                    <span>{{fieldServiceType.description}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/field-service-type', fieldServiceType.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

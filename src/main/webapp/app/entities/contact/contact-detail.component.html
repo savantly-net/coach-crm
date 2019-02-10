@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contact">
+            <h2><span jhiTranslate="coachApp.contact.detail.title">Contact</span> {{contact.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="coachApp.contact.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{contact.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{contact.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.dob">Dob</span></dt>
+                <dd>
+                    <span>{{contact.dob}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'coachApp.ContactStatus.' + contact.status}}">{{contact.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.companyName">Company Name</span></dt>
+                <dd>
+                    <span>{{contact.companyName}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.jobRole">Job Role</span></dt>
+                <dd>
+                    <span>{{contact.jobRole}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.position">Position</span></dt>
+                <dd>
+                    <span>{{contact.position}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.linkedIn">Linked In</span></dt>
+                <dd>
+                    <span>{{contact.linkedIn}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.fax">Fax</span></dt>
+                <dd>
+                    <span>{{contact.fax}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.department">Department</span></dt>
+                <dd>
+                    <span>{{contact.department}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.address">Address</span></dt>
+                <dd>
+                    <div *ngIf="contact.address">
+                        <a [routerLink]="['/address', contact.address?.id, 'view']">{{contact.address?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contact', contact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

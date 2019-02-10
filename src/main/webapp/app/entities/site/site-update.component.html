@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-site-heading" jhiTranslate="coachApp.site.home.createOrEditLabel">Create or edit a Site</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!site.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="site.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="site.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                        [(ngModel)]="site.phoneNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.altPhoneNumber" for="field_altPhoneNumber">Alt Phone Number</label>
+                    <input type="text" class="form-control" name="altPhoneNumber" id="field_altPhoneNumber"
+                        [(ngModel)]="site.altPhoneNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.fax" for="field_fax">Fax</label>
+                    <input type="text" class="form-control" name="fax" id="field_fax"
+                        [(ngModel)]="site.fax" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.website" for="field_website">Website</label>
+                    <input type="text" class="form-control" name="website" id="field_website"
+                        [(ngModel)]="site.website" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.industry" for="field_industry">Industry</label>
+                    <input type="text" class="form-control" name="industry" id="field_industry"
+                        [(ngModel)]="site.industry" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.primaryContact" for="field_primaryContact">Primary Contact</label>
+                    <select class="form-control" id="field_primaryContact" name="primaryContact" [(ngModel)]="site.primaryContact">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contactOption.id === site.primaryContact?.id ? site.primaryContact : contactOption" *ngFor="let contactOption of primarycontacts; trackBy: trackContactById">{{contactOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.otherContacts" for="field_otherContacts">Other Contacts</label>
+                    <select class="form-control" id="field_otherContacts" name="otherContacts" [(ngModel)]="site.otherContacts">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contactOption.id === site.otherContacts?.id ? site.otherContacts : contactOption" *ngFor="let contactOption of othercontacts; trackBy: trackContactById">{{contactOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.address" for="field_address">Address</label>
+                    <select class="form-control" id="field_address" name="address" [(ngModel)]="site.address">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="addressOption.id === site.address?.id ? site.address : addressOption" *ngFor="let addressOption of addresses; trackBy: trackAddressById">{{addressOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

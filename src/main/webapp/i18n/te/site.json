@@ -1,0 +1,30 @@
+{
+    "coachApp": {
+        "site": {
+            "home": {
+                "title": "Sites",
+                "createLabel": "కొత్త Site  సృష్టించండి",
+                "createOrEditLabel": "Site సృష్టించండి లేదా సవరించండి",
+                "search": "Site కొరకు శోధించండి"
+            },
+            "created": "{{ param }} ఐడీ తో ఒక కొత్త Site సృష్టించబడినది",
+            "updated": "{{ param }} ఐడీ తో ఒక కొత్త Site సవరించబడినది",
+            "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Site తొలగించబడినది",
+            "delete": {
+                "question": "మీరు Site {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+            },
+            "detail": {
+                "title": "Site"
+            },
+            "name": "Name",
+            "phoneNumber": "Phone Number",
+            "altPhoneNumber": "Alt Phone Number",
+            "fax": "Fax",
+            "website": "Website",
+            "industry": "Industry",
+            "primaryContact": "Primary Contact",
+            "otherContacts": "Other Contacts",
+            "address": "Address"
+        }
+    }
+}

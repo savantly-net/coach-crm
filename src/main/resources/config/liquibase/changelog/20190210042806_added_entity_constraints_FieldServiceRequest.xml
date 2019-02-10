@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FieldServiceRequest.
+    -->
+    <changeSet id="20190210042806-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="requestor_id"
+                                 baseTableName="field_service_request"
+                                 constraintName="fk_field_service_request_requestor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contact"/>
+
+        <addForeignKeyConstraint baseColumnNames="field_service_type_id"
+                                 baseTableName="field_service_request"
+                                 constraintName="fk_field_service_request_field_service_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="field_service_type"/>
+
+    </changeSet>
+</databaseChangeLog>

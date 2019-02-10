@@ -1,0 +1,9 @@
+{
+    "coachApp": {
+        "FieldServiceStatus": {
+            "null": "",
+            "PROPOSAL": "PROPOSAL",
+            "CONTRACT": "CONTRACT"
+        }
+    }
+}

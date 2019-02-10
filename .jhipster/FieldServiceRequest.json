@@ -1,0 +1,63 @@
+{
+    "name": "FieldServiceRequest",
+    "fields": [
+        {
+            "fieldName": "status",
+            "fieldType": "FieldServiceStatus",
+            "fieldValues": "PROPOSAL,CONTRACT"
+        },
+        {
+            "fieldName": "contractDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "finishDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "total",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "requestor",
+            "otherEntityName": "contact",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "fieldServiceRequest"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "documents",
+            "otherEntityName": "upload",
+            "otherEntityRelationshipName": "fieldServiceRequest"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "fieldServiceType",
+            "otherEntityName": "fieldServiceType",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "fieldServiceRequest"
+        }
+    ],
+    "changelogDate": "20190210042806",
+    "entityTableName": "field_service_request",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

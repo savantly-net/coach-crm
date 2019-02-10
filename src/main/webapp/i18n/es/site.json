@@ -1,0 +1,30 @@
+{
+    "coachApp": {
+        "site": {
+            "home": {
+                "title": "Sites",
+                "createLabel": "Crear nuevo Site",
+                "createOrEditLabel": "Crear o editar Site",
+                "search": "Search for Site"
+            },
+            "created": "Un nuevo Site ha sido creado con el identificador {{ param }}",
+            "updated": "Un Site ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Site ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Site {{ id }}?"
+            },
+            "detail": {
+                "title": "Site"
+            },
+            "name": "Name",
+            "phoneNumber": "Phone Number",
+            "altPhoneNumber": "Alt Phone Number",
+            "fax": "Fax",
+            "website": "Website",
+            "industry": "Industry",
+            "primaryContact": "Primary Contact",
+            "otherContacts": "Other Contacts",
+            "address": "Address"
+        }
+    }
+}

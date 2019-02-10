@@ -1,0 +1,24 @@
+{
+    "coachApp": {
+        "fieldServiceType": {
+            "home": {
+                "title": "Field Service Types",
+                "createLabel": "Crear nuevo Field Service Type",
+                "createOrEditLabel": "Crear o editar Field Service Type",
+                "search": "Search for Field Service Type"
+            },
+            "created": "Un nuevo Field Service Type ha sido creado con el identificador {{ param }}",
+            "updated": "Un Field Service Type ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Field Service Type ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Field Service Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Field Service Type"
+            },
+            "name": "Name",
+            "description": "Description",
+            "fieldServiceRequest": "Field Service Request"
+        }
+    }
+}

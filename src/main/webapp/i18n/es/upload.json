@@ -1,0 +1,25 @@
+{
+    "coachApp": {
+        "upload": {
+            "home": {
+                "title": "Uploads",
+                "createLabel": "Crear nuevo Upload",
+                "createOrEditLabel": "Crear o editar Upload",
+                "search": "Search for Upload"
+            },
+            "created": "Un nuevo Upload ha sido creado con el identificador {{ param }}",
+            "updated": "Un Upload ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Upload ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Upload {{ id }}?"
+            },
+            "detail": {
+                "title": "Upload"
+            },
+            "name": "Name",
+            "description": "Description",
+            "file": "File",
+            "fieldServiceRequest": "Field Service Request"
+        }
+    }
+}

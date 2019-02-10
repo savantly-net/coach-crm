@@ -1,0 +1,9 @@
+{
+    "coachApp": {
+        "ContactStatus": {
+            "null": "",
+            "LEAD": "LEAD",
+            "CLIENT": "CLIENT"
+        }
+    }
+}

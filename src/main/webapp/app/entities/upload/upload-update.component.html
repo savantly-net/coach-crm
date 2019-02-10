@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-upload-heading" jhiTranslate="coachApp.upload.home.createOrEditLabel">Create or edit a Upload</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!upload.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="upload.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.upload.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="upload.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.upload.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="upload.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.upload.file" for="field_file">File</label>
+                    <div>
+                        <div *ngIf="upload.file" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(upload.fileContentType, upload.file)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{upload.fileContentType}}, {{byteSize(upload.file)}}</span>
+                            <button type="button" (click)="upload.file=null;upload.fileContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_file" (change)="setFileData($event, upload, 'file', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="file" id="field_file"
+                        [(ngModel)]="upload.file" />
+                    <input type="hidden" class="form-control" name="fileContentType" id="field_fileContentType"
+                        [(ngModel)]="upload.fileContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.upload.fieldServiceRequest" for="field_fieldServiceRequest">Field Service Request</label>
+                    <select class="form-control" id="field_fieldServiceRequest" name="fieldServiceRequest" [(ngModel)]="upload.fieldServiceRequest" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fieldServiceRequestOption.id === upload.fieldServiceRequest?.id ? upload.fieldServiceRequest : fieldServiceRequestOption" *ngFor="let fieldServiceRequestOption of fieldservicerequests; trackBy: trackFieldServiceRequestById">{{fieldServiceRequestOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

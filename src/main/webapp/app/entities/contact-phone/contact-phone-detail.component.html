@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contactPhone">
+            <h2><span jhiTranslate="coachApp.contactPhone.detail.title">Contact Phone</span> {{contactPhone.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="coachApp.contactPhone.number">Number</span></dt>
+                <dd>
+                    <span>{{contactPhone.number}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contactPhone.sms">Sms</span></dt>
+                <dd>
+                    <span>{{contactPhone.sms}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contactPhone.contact">Contact</span></dt>
+                <dd>
+                    <div *ngIf="contactPhone.contact">
+                        <a [routerLink]="['/contact', contactPhone.contact?.id, 'view']">{{contactPhone.contact?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contact-phone', contactPhone.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

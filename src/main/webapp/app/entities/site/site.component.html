@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="coachApp.site.home.title">Sites</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-site" [routerLink]="['/site/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="coachApp.site.home.createLabel">
+            Create new Site
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'coachApp.site.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="sites">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="coachApp.site.name">Name</span></th>
+            <th><span jhiTranslate="coachApp.site.phoneNumber">Phone Number</span></th>
+            <th><span jhiTranslate="coachApp.site.altPhoneNumber">Alt Phone Number</span></th>
+            <th><span jhiTranslate="coachApp.site.fax">Fax</span></th>
+            <th><span jhiTranslate="coachApp.site.website">Website</span></th>
+            <th><span jhiTranslate="coachApp.site.industry">Industry</span></th>
+            <th><span jhiTranslate="coachApp.site.primaryContact">Primary Contact</span></th>
+            <th><span jhiTranslate="coachApp.site.otherContacts">Other Contacts</span></th>
+            <th><span jhiTranslate="coachApp.site.address">Address</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let site of sites ;trackBy: trackId">
+                <td><a [routerLink]="['/site', site.id, 'view' ]">{{site.id}}</a></td>
+                <td>{{site.name}}</td>
+                <td>{{site.phoneNumber}}</td>
+                <td>{{site.altPhoneNumber}}</td>
+                <td>{{site.fax}}</td>
+                <td>{{site.website}}</td>
+                <td>{{site.industry}}</td>
+                <td>
+                    <div *ngIf="site.primaryContact">
+                        <a [routerLink]="['../contact', site.primaryContact?.id, 'view' ]" >{{site.primaryContact?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="site.otherContacts">
+                        <a [routerLink]="['../contact', site.otherContacts?.id, 'view' ]" >{{site.otherContacts?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="site.address">
+                        <a [routerLink]="['../address', site.address?.id, 'view' ]" >{{site.address?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/site', site.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/site', site.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'site', { outlets: { popup: site.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

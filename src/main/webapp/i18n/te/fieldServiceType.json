@@ -1,0 +1,24 @@
+{
+    "coachApp": {
+        "fieldServiceType": {
+            "home": {
+                "title": "Field Service Types",
+                "createLabel": "కొత్త Field Service Type  సృష్టించండి",
+                "createOrEditLabel": "Field Service Type సృష్టించండి లేదా సవరించండి",
+                "search": "Field Service Type కొరకు శోధించండి"
+            },
+            "created": "{{ param }} ఐడీ తో ఒక కొత్త Field Service Type సృష్టించబడినది",
+            "updated": "{{ param }} ఐడీ తో ఒక కొత్త Field Service Type సవరించబడినది",
+            "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Field Service Type తొలగించబడినది",
+            "delete": {
+                "question": "మీరు Field Service Type {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+            },
+            "detail": {
+                "title": "Field Service Type"
+            },
+            "name": "Name",
+            "description": "Description",
+            "fieldServiceRequest": "Field Service Request"
+        }
+    }
+}

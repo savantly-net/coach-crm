@@ -1,0 +1,30 @@
+{
+    "coachApp": {
+        "fieldServiceRequest": {
+            "home": {
+                "title": "Field Service Requests",
+                "createLabel": "Create a new Field Service Request",
+                "createOrEditLabel": "Create or edit a Field Service Request",
+                "search": "Search for Field Service Request"
+            },
+            "created": "A new Field Service Request is created with identifier {{ param }}",
+            "updated": "A Field Service Request is updated with identifier {{ param }}",
+            "deleted": "A Field Service Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Field Service Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Field Service Request"
+            },
+            "status": "Status",
+            "contractDate": "Contract Date",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "description": "Description",
+            "total": "Total",
+            "requestor": "Requestor",
+            "documents": "Documents",
+            "fieldServiceType": "Field Service Type"
+        }
+    }
+}
