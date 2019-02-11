@@ -34,8 +34,6 @@ script:
   - chmod +x mvnw
   - ./mvnw clean test
   - ./mvnw com.github.eirslett:frontend-maven-plugin:npm -Dfrontend.npm.arguments='run test' -Dmaven.repo.local=$MAVEN_USER_HOME
-  - ./mvnw verify -Pprod -DskipTests
-  - ./mvnw com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=$HEROKU_APPNAME
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
