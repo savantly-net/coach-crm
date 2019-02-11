@@ -21,7 +21,7 @@ import {
 @NgModule({
     imports: [
         CoachSharedModule,
-        RouterModule.forChild(adminState)
+        RouterModule.forChild(adminState),
         EntityAuditModule,
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     ],
