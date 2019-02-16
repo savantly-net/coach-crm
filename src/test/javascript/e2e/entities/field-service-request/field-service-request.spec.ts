@@ -50,14 +50,24 @@ describe('FieldServiceRequest e2e test', () => {
             fieldServiceRequestUpdatePage.setFinishDateInput('2000-12-31'),
             fieldServiceRequestUpdatePage.setDescriptionInput('description'),
             fieldServiceRequestUpdatePage.setTotalInput('5'),
-            fieldServiceRequestUpdatePage.requestorSelectLastOption(),
-            fieldServiceRequestUpdatePage.fieldServiceTypeSelectLastOption()
+            fieldServiceRequestUpdatePage.setStreetInput('street'),
+            fieldServiceRequestUpdatePage.setCityInput('city'),
+            fieldServiceRequestUpdatePage.setStateInput('state'),
+            fieldServiceRequestUpdatePage.setZipcodeInput('zipcode'),
+            fieldServiceRequestUpdatePage.setCountryInput('country'),
+            fieldServiceRequestUpdatePage.fieldServiceTypeSelectLastOption(),
+            fieldServiceRequestUpdatePage.requestorSelectLastOption()
         ]);
         expect(await fieldServiceRequestUpdatePage.getContractDateInput()).to.eq('2000-12-31');
         expect(await fieldServiceRequestUpdatePage.getStartDateInput()).to.eq('2000-12-31');
         expect(await fieldServiceRequestUpdatePage.getFinishDateInput()).to.eq('2000-12-31');
         expect(await fieldServiceRequestUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await fieldServiceRequestUpdatePage.getTotalInput()).to.eq('5');
+        expect(await fieldServiceRequestUpdatePage.getStreetInput()).to.eq('street');
+        expect(await fieldServiceRequestUpdatePage.getCityInput()).to.eq('city');
+        expect(await fieldServiceRequestUpdatePage.getStateInput()).to.eq('state');
+        expect(await fieldServiceRequestUpdatePage.getZipcodeInput()).to.eq('zipcode');
+        expect(await fieldServiceRequestUpdatePage.getCountryInput()).to.eq('country');
         await fieldServiceRequestUpdatePage.save();
         expect(await fieldServiceRequestUpdatePage.getSaveButton().isPresent()).to.be.false;
 

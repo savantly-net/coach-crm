@@ -7,8 +7,8 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IContact } from 'app/shared/model/contact.model';
 import { ContactService } from './contact.service';
-import { IAddress } from 'app/shared/model/address.model';
-import { AddressService } from 'app/entities/address';
+import { ISite } from 'app/shared/model/site.model';
+import { SiteService } from 'app/entities/site';
 
 @Component({
     selector: 'jhi-contact-update',
@@ -18,13 +18,13 @@ export class ContactUpdateComponent implements OnInit {
     contact: IContact;
     isSaving: boolean;
 
-    addresses: IAddress[];
+    sites: ISite[];
     dobDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected contactService: ContactService,
-        protected addressService: AddressService,
+        protected siteService: SiteService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -33,31 +33,13 @@ export class ContactUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ contact }) => {
             this.contact = contact;
         });
-        this.addressService
-            .query({ filter: 'contact-is-null' })
+        this.siteService
+            .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IAddress[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IAddress[]>) => response.body)
+                filter((mayBeOk: HttpResponse<ISite[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ISite[]>) => response.body)
             )
-            .subscribe(
-                (res: IAddress[]) => {
-                    if (!this.contact.address || !this.contact.address.id) {
-                        this.addresses = res;
-                    } else {
-                        this.addressService
-                            .find(this.contact.address.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IAddress>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IAddress>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IAddress) => (this.addresses = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            .subscribe((res: ISite[]) => (this.sites = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -90,7 +72,7 @@ export class ContactUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackAddressById(index: number, item: IAddress) {
+    trackSiteById(index: number, item: ISite) {
         return item.id;
     }
 }

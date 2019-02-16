@@ -160,6 +160,7 @@ public class UserService {
         Map<String, Object> details = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
         User user = getUser(details);
         Set<Authority> userAuthorities = extractAuthorities(authentication, details);
+        log.debug("",userAuthorities);
         user.setAuthorities(userAuthorities);
 
         // convert Authorities to GrantedAuthorities

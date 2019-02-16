@@ -3,6 +3,13 @@
     "fields": [
         {
             "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "emailAddress",
             "fieldType": "String"
         },
         {
@@ -24,6 +31,26 @@
         {
             "fieldName": "industry",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -31,24 +58,14 @@
             "relationshipType": "one-to-one",
             "relationshipName": "primaryContact",
             "otherEntityName": "contact",
-            "otherEntityField": "id",
+            "otherEntityField": "firstName",
             "ownerSide": true,
             "otherEntityRelationshipName": "site"
         },
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
             "relationshipName": "otherContacts",
             "otherEntityName": "contact",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "site"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "address",
-            "otherEntityName": "address",
-            "otherEntityField": "id",
-            "ownerSide": true,
             "otherEntityRelationshipName": "site"
         }
     ],

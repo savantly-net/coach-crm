@@ -29,16 +29,36 @@
                 <dd>
                     <span>{{fieldServiceRequest.total}}</span>
                 </dd>
-                <dt><span jhiTranslate="coachApp.fieldServiceRequest.requestor">Requestor</span></dt>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.street">Street</span></dt>
                 <dd>
-                    <div *ngIf="fieldServiceRequest.requestor">
-                        <a [routerLink]="['/contact', fieldServiceRequest.requestor?.id, 'view']">{{fieldServiceRequest.requestor?.id}}</a>
-                    </div>
+                    <span>{{fieldServiceRequest.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.city">City</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.state">State</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.state}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.zipcode">Zipcode</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.zipcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.country">Country</span></dt>
+                <dd>
+                    <span>{{fieldServiceRequest.country}}</span>
                 </dd>
                 <dt><span jhiTranslate="coachApp.fieldServiceRequest.fieldServiceType">Field Service Type</span></dt>
                 <dd>
                     <div *ngIf="fieldServiceRequest.fieldServiceType">
                         <a [routerLink]="['/field-service-type', fieldServiceRequest.fieldServiceType?.id, 'view']">{{fieldServiceRequest.fieldServiceType?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="coachApp.fieldServiceRequest.requestor">Requestor</span></dt>
+                <dd>
+                    <div *ngIf="fieldServiceRequest.requestor">
+                        <a [routerLink]="['/contact', fieldServiceRequest.requestor?.id, 'view']">{{fieldServiceRequest.requestor?.firstName}}</a>
                     </div>
                 </dd>
             </dl>

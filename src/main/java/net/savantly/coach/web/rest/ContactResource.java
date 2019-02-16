@@ -4,12 +4,18 @@ import net.savantly.coach.repository.ContactRepository;
 import net.savantly.coach.repository.search.ContactSearchRepository;
 import net.savantly.coach.web.rest.errors.BadRequestAlertException;
 import net.savantly.coach.web.rest.util.HeaderUtil;
+import net.savantly.coach.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +54,7 @@ public class ContactResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/contacts")
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) throws URISyntaxException {
+    public ResponseEntity<Contact> createContact(@Valid @RequestBody Contact contact) throws URISyntaxException {
         log.debug("REST request to save Contact : {}", contact);
         if (contact.getId() != null) {
             throw new BadRequestAlertException("A new contact cannot already have an ID", ENTITY_NAME, "idexists");
@@ -70,7 +76,7 @@ public class ContactResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/contacts")
-    public ResponseEntity<Contact> updateContact(@RequestBody Contact contact) throws URISyntaxException {
+    public ResponseEntity<Contact> updateContact(@Valid @RequestBody Contact contact) throws URISyntaxException {
         log.debug("REST request to update Contact : {}", contact);
         if (contact.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -85,12 +91,15 @@ public class ContactResource {
     /**
      * GET  /contacts : get all the contacts.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of contacts in body
      */
     @GetMapping("/contacts")
-    public List<Contact> getAllContacts() {
-        log.debug("REST request to get all Contacts");
-        return contactRepository.findAll();
+    public ResponseEntity<List<Contact>> getAllContacts(Pageable pageable) {
+        log.debug("REST request to get a page of Contacts");
+        Page<Contact> page = contactRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contacts");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -125,14 +134,15 @@ public class ContactResource {
      * to the query.
      *
      * @param query the query of the contact search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/contacts")
-    public List<Contact> searchContacts(@RequestParam String query) {
-        log.debug("REST request to search Contacts for query {}", query);
-        return StreamSupport
-            .stream(contactSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public ResponseEntity<List<Contact>> searchContacts(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Contacts for query {}", query);
+        Page<Contact> page = contactSearchRepository.search(queryStringQuery(query), pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/contacts");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

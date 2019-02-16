@@ -21,7 +21,21 @@ describe('Service Tests', () => {
             service = injector.get(SiteService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Site(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Site(
+                0,
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA'
+            );
         });
 
         describe('Service methods', async () => {
@@ -56,11 +70,17 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
+                        emailAddress: 'BBBBBB',
                         phoneNumber: 'BBBBBB',
                         altPhoneNumber: 'BBBBBB',
                         fax: 'BBBBBB',
                         website: 'BBBBBB',
-                        industry: 'BBBBBB'
+                        industry: 'BBBBBB',
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -78,11 +98,17 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
+                        emailAddress: 'BBBBBB',
                         phoneNumber: 'BBBBBB',
                         altPhoneNumber: 'BBBBBB',
                         fax: 'BBBBBB',
                         website: 'BBBBBB',
-                        industry: 'BBBBBB'
+                        industry: 'BBBBBB',
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );

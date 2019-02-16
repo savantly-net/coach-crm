@@ -39,9 +39,6 @@ public class CacheConfiguration {
             cm.createCache(net.savantly.coach.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.EntityAuditEvent.class.getName(), jcacheConfiguration);
-            cm.createCache(net.savantly.coach.domain.ContactPhone.class.getName(), jcacheConfiguration);
-            cm.createCache(net.savantly.coach.domain.ContactEmail.class.getName(), jcacheConfiguration);
-            cm.createCache(net.savantly.coach.domain.Address.class.getName(), jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.Site.class.getName(), jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.Contact.class.getName(), jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.Contact.class.getName() + ".phoneNumbers", jcacheConfiguration);
@@ -51,6 +48,8 @@ public class CacheConfiguration {
             cm.createCache(net.savantly.coach.domain.FieldServiceType.class.getName() + ".fieldServiceRequests", jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.FieldServiceRequest.class.getName(), jcacheConfiguration);
             cm.createCache(net.savantly.coach.domain.FieldServiceRequest.class.getName() + ".documents", jcacheConfiguration);
+            cm.createCache(net.savantly.coach.domain.Site.class.getName() + ".otherContacts", jcacheConfiguration);
+            cm.createCache(net.savantly.coach.domain.FieldServiceType.class.getName() + ".requestTypes", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

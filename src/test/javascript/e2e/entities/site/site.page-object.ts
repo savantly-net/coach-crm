@@ -27,14 +27,18 @@ export class SiteUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
+    emailAddressInput = element(by.id('field_emailAddress'));
     phoneNumberInput = element(by.id('field_phoneNumber'));
     altPhoneNumberInput = element(by.id('field_altPhoneNumber'));
     faxInput = element(by.id('field_fax'));
     websiteInput = element(by.id('field_website'));
     industryInput = element(by.id('field_industry'));
+    streetInput = element(by.id('field_street'));
+    cityInput = element(by.id('field_city'));
+    stateInput = element(by.id('field_state'));
+    zipcodeInput = element(by.id('field_zipcode'));
+    countryInput = element(by.id('field_country'));
     primaryContactSelect = element(by.id('field_primaryContact'));
-    otherContactsSelect = element(by.id('field_otherContacts'));
-    addressSelect = element(by.id('field_address'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -46,6 +50,14 @@ export class SiteUpdatePage {
 
     async getNameInput() {
         return this.nameInput.getAttribute('value');
+    }
+
+    async setEmailAddressInput(emailAddress) {
+        await this.emailAddressInput.sendKeys(emailAddress);
+    }
+
+    async getEmailAddressInput() {
+        return this.emailAddressInput.getAttribute('value');
     }
 
     async setPhoneNumberInput(phoneNumber) {
@@ -88,6 +100,46 @@ export class SiteUpdatePage {
         return this.industryInput.getAttribute('value');
     }
 
+    async setStreetInput(street) {
+        await this.streetInput.sendKeys(street);
+    }
+
+    async getStreetInput() {
+        return this.streetInput.getAttribute('value');
+    }
+
+    async setCityInput(city) {
+        await this.cityInput.sendKeys(city);
+    }
+
+    async getCityInput() {
+        return this.cityInput.getAttribute('value');
+    }
+
+    async setStateInput(state) {
+        await this.stateInput.sendKeys(state);
+    }
+
+    async getStateInput() {
+        return this.stateInput.getAttribute('value');
+    }
+
+    async setZipcodeInput(zipcode) {
+        await this.zipcodeInput.sendKeys(zipcode);
+    }
+
+    async getZipcodeInput() {
+        return this.zipcodeInput.getAttribute('value');
+    }
+
+    async setCountryInput(country) {
+        await this.countryInput.sendKeys(country);
+    }
+
+    async getCountryInput() {
+        return this.countryInput.getAttribute('value');
+    }
+
     async primaryContactSelectLastOption() {
         await this.primaryContactSelect
             .all(by.tagName('option'))
@@ -105,44 +157,6 @@ export class SiteUpdatePage {
 
     async getPrimaryContactSelectedOption() {
         return this.primaryContactSelect.element(by.css('option:checked')).getText();
-    }
-
-    async otherContactsSelectLastOption() {
-        await this.otherContactsSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async otherContactsSelectOption(option) {
-        await this.otherContactsSelect.sendKeys(option);
-    }
-
-    getOtherContactsSelect(): ElementFinder {
-        return this.otherContactsSelect;
-    }
-
-    async getOtherContactsSelectedOption() {
-        return this.otherContactsSelect.element(by.css('option:checked')).getText();
-    }
-
-    async addressSelectLastOption() {
-        await this.addressSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async addressSelectOption(option) {
-        await this.addressSelect.sendKeys(option);
-    }
-
-    getAddressSelect(): ElementFinder {
-        return this.addressSelect;
-    }
-
-    async getAddressSelectedOption() {
-        return this.addressSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

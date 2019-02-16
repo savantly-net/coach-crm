@@ -18,7 +18,7 @@
             },
             "name": "Name",
             "description": "Description",
-            "fieldServiceRequest": "Field Service Request"
+            "requestType": "Request Type"
         }
     }
 }

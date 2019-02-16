@@ -28,27 +28,36 @@
     <div class="table-responsive" *ngIf="contacts">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="coachApp.contact.firstName">First Name</span></th>
-            <th><span jhiTranslate="coachApp.contact.lastName">Last Name</span></th>
-            <th><span jhiTranslate="coachApp.contact.dob">Dob</span></th>
-            <th><span jhiTranslate="coachApp.contact.status">Status</span></th>
-            <th><span jhiTranslate="coachApp.contact.companyName">Company Name</span></th>
-            <th><span jhiTranslate="coachApp.contact.jobRole">Job Role</span></th>
-            <th><span jhiTranslate="coachApp.contact.position">Position</span></th>
-            <th><span jhiTranslate="coachApp.contact.linkedIn">Linked In</span></th>
-            <th><span jhiTranslate="coachApp.contact.fax">Fax</span></th>
-            <th><span jhiTranslate="coachApp.contact.department">Department</span></th>
-            <th><span jhiTranslate="coachApp.contact.address">Address</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="firstName"><span jhiTranslate="coachApp.contact.firstName">First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastName"><span jhiTranslate="coachApp.contact.lastName">Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phoneNumber"><span jhiTranslate="coachApp.contact.phoneNumber">Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="emailAddress"><span jhiTranslate="coachApp.contact.emailAddress">Email Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dob"><span jhiTranslate="coachApp.contact.dob">Dob</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="coachApp.contact.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="companyName"><span jhiTranslate="coachApp.contact.companyName">Company Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="jobRole"><span jhiTranslate="coachApp.contact.jobRole">Job Role</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="position"><span jhiTranslate="coachApp.contact.position">Position</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="linkedIn"><span jhiTranslate="coachApp.contact.linkedIn">Linked In</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fax"><span jhiTranslate="coachApp.contact.fax">Fax</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="department"><span jhiTranslate="coachApp.contact.department">Department</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="street"><span jhiTranslate="coachApp.contact.street">Street</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="city"><span jhiTranslate="coachApp.contact.city">City</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="state"><span jhiTranslate="coachApp.contact.state">State</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="zipcode"><span jhiTranslate="coachApp.contact.zipcode">Zipcode</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="country"><span jhiTranslate="coachApp.contact.country">Country</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="site.id"><span jhiTranslate="coachApp.contact.site">Site</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let contact of contacts ;trackBy: trackId">
                 <td><a [routerLink]="['/contact', contact.id, 'view' ]">{{contact.id}}</a></td>
                 <td>{{contact.firstName}}</td>
                 <td>{{contact.lastName}}</td>
+                <td>{{contact.phoneNumber}}</td>
+                <td>{{contact.emailAddress}}</td>
                 <td>{{contact.dob | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'coachApp.ContactStatus.' + contact.status}}">{{contact.status}}</td>
                 <td>{{contact.companyName}}</td>
@@ -57,9 +66,14 @@
                 <td>{{contact.linkedIn}}</td>
                 <td>{{contact.fax}}</td>
                 <td>{{contact.department}}</td>
+                <td>{{contact.street}}</td>
+                <td>{{contact.city}}</td>
+                <td>{{contact.state}}</td>
+                <td>{{contact.zipcode}}</td>
+                <td>{{contact.country}}</td>
                 <td>
-                    <div *ngIf="contact.address">
-                        <a [routerLink]="['../address', contact.address?.id, 'view' ]" >{{contact.address?.id}}</a>
+                    <div *ngIf="contact.site">
+                        <a [routerLink]="['../site', contact.site?.id, 'view' ]" >{{contact.site?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

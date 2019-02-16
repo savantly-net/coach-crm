@@ -166,6 +166,24 @@ public class UploadResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = uploadRepository.findAll().size();
+        // set the field null
+        upload.setName(null);
+
+        // Create the Upload, which fails.
+
+        restUploadMockMvc.perform(post("/api/uploads")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(upload)))
+            .andExpect(status().isBadRequest());
+
+        List<Upload> uploadList = uploadRepository.findAll();
+        assertThat(uploadList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllUploads() throws Exception {
         // Initialize the database
         uploadRepository.saveAndFlush(upload);

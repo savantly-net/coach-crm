@@ -23,10 +23,18 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="last_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phone_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email_address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -35,7 +43,7 @@
             </column>
 
             <column name="status" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="company_name" type="varchar(255)">
@@ -61,9 +69,31 @@
             <column name="department" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="address_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_contact_address_id" />
+
+            <column name="street" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
+
+            <column name="city" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="state" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="zipcode" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="country" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="site_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

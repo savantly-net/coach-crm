@@ -6,17 +6,12 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210040649_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190210042759_added_entity_ContactPhone.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190210042800_added_entity_ContactEmail.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190210042801_added_entity_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042802_added_entity_Site.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042803_added_entity_Contact.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042804_added_entity_Upload.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042805_added_entity_FieldServiceType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042806_added_entity_FieldServiceRequest.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20190210042759_added_entity_constraints_ContactPhone.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190210042800_added_entity_constraints_ContactEmail.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042802_added_entity_constraints_Site.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042803_added_entity_constraints_Contact.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190210042804_added_entity_constraints_Upload.xml" relativeToChangelogFile="false"/>

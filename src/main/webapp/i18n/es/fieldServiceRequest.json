@@ -22,9 +22,14 @@
             "finishDate": "Finish Date",
             "description": "Description",
             "total": "Total",
+            "street": "Street",
+            "city": "City",
+            "state": "State",
+            "zipcode": "Zipcode",
+            "country": "Country",
+            "fieldServiceType": "Field Service Type",
             "requestor": "Requestor",
-            "documents": "Documents",
-            "fieldServiceType": "Field Service Type"
+            "documents": "Documents"
         }
     }
 }

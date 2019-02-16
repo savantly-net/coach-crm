@@ -13,6 +13,14 @@
                 <dd>
                     <span>{{contact.lastName}}</span>
                 </dd>
+                <dt><span jhiTranslate="coachApp.contact.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{contact.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{contact.emailAddress}}</span>
+                </dd>
                 <dt><span jhiTranslate="coachApp.contact.dob">Dob</span></dt>
                 <dd>
                     <span>{{contact.dob}}</span>
@@ -45,10 +53,30 @@
                 <dd>
                     <span>{{contact.department}}</span>
                 </dd>
-                <dt><span jhiTranslate="coachApp.contact.address">Address</span></dt>
+                <dt><span jhiTranslate="coachApp.contact.street">Street</span></dt>
                 <dd>
-                    <div *ngIf="contact.address">
-                        <a [routerLink]="['/address', contact.address?.id, 'view']">{{contact.address?.id}}</a>
+                    <span>{{contact.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.city">City</span></dt>
+                <dd>
+                    <span>{{contact.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.state">State</span></dt>
+                <dd>
+                    <span>{{contact.state}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.zipcode">Zipcode</span></dt>
+                <dd>
+                    <span>{{contact.zipcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.country">Country</span></dt>
+                <dd>
+                    <span>{{contact.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.contact.site">Site</span></dt>
+                <dd>
+                    <div *ngIf="contact.site">
+                        <a [routerLink]="['/site', contact.site?.id, 'view']">{{contact.site?.id}}</a>
                     </div>
                 </dd>
             </dl>

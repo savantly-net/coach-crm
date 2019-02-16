@@ -28,6 +28,8 @@ export class ContactUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     firstNameInput = element(by.id('field_firstName'));
     lastNameInput = element(by.id('field_lastName'));
+    phoneNumberInput = element(by.id('field_phoneNumber'));
+    emailAddressInput = element(by.id('field_emailAddress'));
     dobInput = element(by.id('field_dob'));
     statusSelect = element(by.id('field_status'));
     companyNameInput = element(by.id('field_companyName'));
@@ -36,7 +38,12 @@ export class ContactUpdatePage {
     linkedInInput = element(by.id('field_linkedIn'));
     faxInput = element(by.id('field_fax'));
     departmentInput = element(by.id('field_department'));
-    addressSelect = element(by.id('field_address'));
+    streetInput = element(by.id('field_street'));
+    cityInput = element(by.id('field_city'));
+    stateInput = element(by.id('field_state'));
+    zipcodeInput = element(by.id('field_zipcode'));
+    countryInput = element(by.id('field_country'));
+    siteSelect = element(by.id('field_site'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -56,6 +63,22 @@ export class ContactUpdatePage {
 
     async getLastNameInput() {
         return this.lastNameInput.getAttribute('value');
+    }
+
+    async setPhoneNumberInput(phoneNumber) {
+        await this.phoneNumberInput.sendKeys(phoneNumber);
+    }
+
+    async getPhoneNumberInput() {
+        return this.phoneNumberInput.getAttribute('value');
+    }
+
+    async setEmailAddressInput(emailAddress) {
+        await this.emailAddressInput.sendKeys(emailAddress);
+    }
+
+    async getEmailAddressInput() {
+        return this.emailAddressInput.getAttribute('value');
     }
 
     async setDobInput(dob) {
@@ -129,23 +152,63 @@ export class ContactUpdatePage {
         return this.departmentInput.getAttribute('value');
     }
 
-    async addressSelectLastOption() {
-        await this.addressSelect
+    async setStreetInput(street) {
+        await this.streetInput.sendKeys(street);
+    }
+
+    async getStreetInput() {
+        return this.streetInput.getAttribute('value');
+    }
+
+    async setCityInput(city) {
+        await this.cityInput.sendKeys(city);
+    }
+
+    async getCityInput() {
+        return this.cityInput.getAttribute('value');
+    }
+
+    async setStateInput(state) {
+        await this.stateInput.sendKeys(state);
+    }
+
+    async getStateInput() {
+        return this.stateInput.getAttribute('value');
+    }
+
+    async setZipcodeInput(zipcode) {
+        await this.zipcodeInput.sendKeys(zipcode);
+    }
+
+    async getZipcodeInput() {
+        return this.zipcodeInput.getAttribute('value');
+    }
+
+    async setCountryInput(country) {
+        await this.countryInput.sendKeys(country);
+    }
+
+    async getCountryInput() {
+        return this.countryInput.getAttribute('value');
+    }
+
+    async siteSelectLastOption() {
+        await this.siteSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async addressSelectOption(option) {
-        await this.addressSelect.sendKeys(option);
+    async siteSelectOption(option) {
+        await this.siteSelect.sendKeys(option);
     }
 
-    getAddressSelect(): ElementFinder {
-        return this.addressSelect;
+    getSiteSelect(): ElementFinder {
+        return this.siteSelect;
     }
 
-    async getAddressSelectedOption() {
-        return this.addressSelect.element(by.css('option:checked')).getText();
+    async getSiteSelectedOption() {
+        return this.siteSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

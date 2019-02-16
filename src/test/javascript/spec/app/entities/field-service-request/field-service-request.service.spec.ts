@@ -25,7 +25,20 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new FieldServiceRequest(0, FieldServiceStatus.PROPOSAL, currentDate, currentDate, currentDate, 'AAAAAAA', 0);
+            elemDefault = new FieldServiceRequest(
+                0,
+                FieldServiceStatus.PROPOSAL,
+                currentDate,
+                currentDate,
+                currentDate,
+                'AAAAAAA',
+                0,
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA'
+            );
         });
 
         describe('Service methods', async () => {
@@ -81,7 +94,12 @@ describe('Service Tests', () => {
                         startDate: currentDate.format(DATE_FORMAT),
                         finishDate: currentDate.format(DATE_FORMAT),
                         description: 'BBBBBB',
-                        total: 1
+                        total: 1,
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -110,7 +128,12 @@ describe('Service Tests', () => {
                         startDate: currentDate.format(DATE_FORMAT),
                         finishDate: currentDate.format(DATE_FORMAT),
                         description: 'BBBBBB',
-                        total: 1
+                        total: 1,
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );

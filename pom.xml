@@ -463,6 +463,7 @@
 					<fork>true</fork>
 					<!-- Enable the line below to have remote debugging of your application 
 						on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
+						<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -899,11 +900,11 @@
 					<artifactId>spring-boot-starter-undertow</artifactId>
 				</dependency>
 				<!-- hangs on my Windows laptop for some reason -->
-				<!-- <dependency>
+				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-devtools</artifactId>
 					<optional>true</optional>
-				</dependency> -->
+				</dependency>
 				<dependency>
 					<groupId>com.h2database</groupId>
 					<artifactId>h2</artifactId>

@@ -28,24 +28,6 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
                     <li>
-                        <a class="dropdown-item" routerLink="contact-phone" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.contactPhone">Contact Phone</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="contact-email" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.contactEmail">Contact Email</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="address" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.address">Address</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="dropdown-item" routerLink="site" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.site">Site</span>
@@ -129,7 +111,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="entity-audit" routerLinkActive="active" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="admin/entity-audit" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon [icon]="'list-alt'" [fixedWidth]="true"></fa-icon>&nbsp;
                             <span jhiTranslate="global.menu.admin.entity-audit">Entity Audit</span>
                         </a>

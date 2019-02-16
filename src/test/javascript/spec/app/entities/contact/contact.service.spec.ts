@@ -29,8 +29,15 @@ describe('Service Tests', () => {
                 0,
                 'AAAAAAA',
                 'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
                 currentDate,
                 ContactStatus.LEAD,
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
@@ -84,6 +91,8 @@ describe('Service Tests', () => {
                     {
                         firstName: 'BBBBBB',
                         lastName: 'BBBBBB',
+                        phoneNumber: 'BBBBBB',
+                        emailAddress: 'BBBBBB',
                         dob: currentDate.format(DATE_FORMAT),
                         status: 'BBBBBB',
                         companyName: 'BBBBBB',
@@ -91,7 +100,12 @@ describe('Service Tests', () => {
                         position: 'BBBBBB',
                         linkedIn: 'BBBBBB',
                         fax: 'BBBBBB',
-                        department: 'BBBBBB'
+                        department: 'BBBBBB',
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -115,6 +129,8 @@ describe('Service Tests', () => {
                     {
                         firstName: 'BBBBBB',
                         lastName: 'BBBBBB',
+                        phoneNumber: 'BBBBBB',
+                        emailAddress: 'BBBBBB',
                         dob: currentDate.format(DATE_FORMAT),
                         status: 'BBBBBB',
                         companyName: 'BBBBBB',
@@ -122,7 +138,12 @@ describe('Service Tests', () => {
                         position: 'BBBBBB',
                         linkedIn: 'BBBBBB',
                         fax: 'BBBBBB',
-                        department: 'BBBBBB'
+                        department: 'BBBBBB',
+                        street: 'BBBBBB',
+                        city: 'BBBBBB',
+                        state: 'BBBBBB',
+                        zipcode: 'BBBBBB',
+                        country: 'BBBBBB'
                     },
                     elemDefault
                 );

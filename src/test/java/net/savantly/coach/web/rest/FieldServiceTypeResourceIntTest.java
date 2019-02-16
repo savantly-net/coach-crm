@@ -156,6 +156,24 @@ public class FieldServiceTypeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = fieldServiceTypeRepository.findAll().size();
+        // set the field null
+        fieldServiceType.setName(null);
+
+        // Create the FieldServiceType, which fails.
+
+        restFieldServiceTypeMockMvc.perform(post("/api/field-service-types")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(fieldServiceType)))
+            .andExpect(status().isBadRequest());
+
+        List<FieldServiceType> fieldServiceTypeList = fieldServiceTypeRepository.findAll();
+        assertThat(fieldServiceTypeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFieldServiceTypes() throws Exception {
         // Initialize the database
         fieldServiceTypeRepository.saveAndFlush(fieldServiceType);

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +49,7 @@ public class UploadResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/uploads")
-    public ResponseEntity<Upload> createUpload(@RequestBody Upload upload) throws URISyntaxException {
+    public ResponseEntity<Upload> createUpload(@Valid @RequestBody Upload upload) throws URISyntaxException {
         log.debug("REST request to save Upload : {}", upload);
         if (upload.getId() != null) {
             throw new BadRequestAlertException("A new upload cannot already have an ID", ENTITY_NAME, "idexists");
@@ -70,7 +71,7 @@ public class UploadResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/uploads")
-    public ResponseEntity<Upload> updateUpload(@RequestBody Upload upload) throws URISyntaxException {
+    public ResponseEntity<Upload> updateUpload(@Valid @RequestBody Upload upload) throws URISyntaxException {
         log.debug("REST request to update Upload : {}", upload);
         if (upload.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

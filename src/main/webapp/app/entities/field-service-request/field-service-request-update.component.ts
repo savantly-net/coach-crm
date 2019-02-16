@@ -7,10 +7,10 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IFieldServiceRequest } from 'app/shared/model/field-service-request.model';
 import { FieldServiceRequestService } from './field-service-request.service';
-import { IContact } from 'app/shared/model/contact.model';
-import { ContactService } from 'app/entities/contact';
 import { IFieldServiceType } from 'app/shared/model/field-service-type.model';
 import { FieldServiceTypeService } from 'app/entities/field-service-type';
+import { IContact } from 'app/shared/model/contact.model';
+import { ContactService } from 'app/entities/contact';
 
 @Component({
     selector: 'jhi-field-service-request-update',
@@ -20,9 +20,9 @@ export class FieldServiceRequestUpdateComponent implements OnInit {
     fieldServiceRequest: IFieldServiceRequest;
     isSaving: boolean;
 
-    requestors: IContact[];
-
     fieldservicetypes: IFieldServiceType[];
+
+    requestors: IContact[];
     contractDateDp: any;
     startDateDp: any;
     finishDateDp: any;
@@ -30,8 +30,8 @@ export class FieldServiceRequestUpdateComponent implements OnInit {
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected fieldServiceRequestService: FieldServiceRequestService,
-        protected contactService: ContactService,
         protected fieldServiceTypeService: FieldServiceTypeService,
+        protected contactService: ContactService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -40,6 +40,13 @@ export class FieldServiceRequestUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ fieldServiceRequest }) => {
             this.fieldServiceRequest = fieldServiceRequest;
         });
+        this.fieldServiceTypeService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IFieldServiceType[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IFieldServiceType[]>) => response.body)
+            )
+            .subscribe((res: IFieldServiceType[]) => (this.fieldservicetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.contactService
             .query({ filter: 'fieldservicerequest-is-null' })
             .pipe(
@@ -65,13 +72,6 @@ export class FieldServiceRequestUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        this.fieldServiceTypeService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IFieldServiceType[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IFieldServiceType[]>) => response.body)
-            )
-            .subscribe((res: IFieldServiceType[]) => (this.fieldservicetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -104,11 +104,11 @@ export class FieldServiceRequestUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackContactById(index: number, item: IContact) {
+    trackFieldServiceTypeById(index: number, item: IFieldServiceType) {
         return item.id;
     }
 
-    trackFieldServiceTypeById(index: number, item: IFieldServiceType) {
+    trackContactById(index: number, item: IContact) {
         return item.id;
     }
 }

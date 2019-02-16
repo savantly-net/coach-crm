@@ -18,6 +18,8 @@
             },
             "firstName": "First Name",
             "lastName": "Last Name",
+            "phoneNumber": "Phone Number",
+            "emailAddress": "Email Address",
             "dob": "Dob",
             "status": "Status",
             "companyName": "Company Name",
@@ -26,9 +28,12 @@
             "linkedIn": "Linked In",
             "fax": "Fax",
             "department": "Department",
-            "address": "Address",
-            "phoneNumbers": "Phone Numbers",
-            "emailAddresses": "Email Addresses"
+            "street": "Street",
+            "city": "City",
+            "state": "State",
+            "zipcode": "Zipcode",
+            "country": "Country",
+            "site": "Site"
         }
     }
 }

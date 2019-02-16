@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +49,7 @@ public class FieldServiceTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/field-service-types")
-    public ResponseEntity<FieldServiceType> createFieldServiceType(@RequestBody FieldServiceType fieldServiceType) throws URISyntaxException {
+    public ResponseEntity<FieldServiceType> createFieldServiceType(@Valid @RequestBody FieldServiceType fieldServiceType) throws URISyntaxException {
         log.debug("REST request to save FieldServiceType : {}", fieldServiceType);
         if (fieldServiceType.getId() != null) {
             throw new BadRequestAlertException("A new fieldServiceType cannot already have an ID", ENTITY_NAME, "idexists");
@@ -70,7 +71,7 @@ public class FieldServiceTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/field-service-types")
-    public ResponseEntity<FieldServiceType> updateFieldServiceType(@RequestBody FieldServiceType fieldServiceType) throws URISyntaxException {
+    public ResponseEntity<FieldServiceType> updateFieldServiceType(@Valid @RequestBody FieldServiceType fieldServiceType) throws URISyntaxException {
         log.debug("REST request to update FieldServiceType : {}", fieldServiceType);
         if (fieldServiceType.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

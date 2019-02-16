@@ -17,14 +17,19 @@
                 "title": "Site"
             },
             "name": "Name",
+            "emailAddress": "Email Address",
             "phoneNumber": "Phone Number",
             "altPhoneNumber": "Alt Phone Number",
             "fax": "Fax",
             "website": "Website",
             "industry": "Industry",
+            "street": "Street",
+            "city": "City",
+            "state": "State",
+            "zipcode": "Zipcode",
+            "country": "Country",
             "primaryContact": "Primary Contact",
-            "otherContacts": "Other Contacts",
-            "address": "Address"
+            "otherContacts": "Other Contacts"
         }
     }
 }

@@ -4,9 +4,14 @@ import net.savantly.coach.repository.FieldServiceRequestRepository;
 import net.savantly.coach.repository.search.FieldServiceRequestSearchRepository;
 import net.savantly.coach.web.rest.errors.BadRequestAlertException;
 import net.savantly.coach.web.rest.util.HeaderUtil;
+import net.savantly.coach.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,12 +90,15 @@ public class FieldServiceRequestResource {
     /**
      * GET  /field-service-requests : get all the fieldServiceRequests.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of fieldServiceRequests in body
      */
     @GetMapping("/field-service-requests")
-    public List<FieldServiceRequest> getAllFieldServiceRequests() {
-        log.debug("REST request to get all FieldServiceRequests");
-        return fieldServiceRequestRepository.findAll();
+    public ResponseEntity<List<FieldServiceRequest>> getAllFieldServiceRequests(Pageable pageable) {
+        log.debug("REST request to get a page of FieldServiceRequests");
+        Page<FieldServiceRequest> page = fieldServiceRequestRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/field-service-requests");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -125,14 +133,15 @@ public class FieldServiceRequestResource {
      * to the query.
      *
      * @param query the query of the fieldServiceRequest search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/field-service-requests")
-    public List<FieldServiceRequest> searchFieldServiceRequests(@RequestParam String query) {
-        log.debug("REST request to search FieldServiceRequests for query {}", query);
-        return StreamSupport
-            .stream(fieldServiceRequestSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public ResponseEntity<List<FieldServiceRequest>> searchFieldServiceRequests(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of FieldServiceRequests for query {}", query);
+        Page<FieldServiceRequest> page = fieldServiceRequestSearchRepository.search(queryStringQuery(query), pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/field-service-requests");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
 }

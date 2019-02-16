@@ -3,49 +3,43 @@ enum ContactStatus {
     CLIENT
 }
 
-entity ContactPhone {
-	number String,
-    sms Boolean
-}
-
-entity ContactEmail {
-	address String,
-    confirmed Boolean,
-    primary Boolean
-}
-
-entity Address {
-	street String,
+entity Site {
+	name String required,
+    emailAddress String,
+    phoneNumber String,
+    altPhoneNumber String,
+    fax String,
+    website String,
+    industry String,
+    street String,
     city String,
     state String,
     zipcode String,
     country String
 }
 
-entity Site {
-	name String,
-    phoneNumber String,
-    altPhoneNumber String,
-    fax String,
-    website String,
-    industry String
-}
-
 entity Contact {
-	firstName String,
-    lastName String,
+	firstName String required,
+    lastName String required,
+    phoneNumber String,
+    emailAddress String,
     dob LocalDate,
-    status ContactStatus,
+    status ContactStatus required,
     companyName String,
     jobRole String,
     position String,
     linkedIn String,
     fax String,
-    department String
+    department String,
+    street String,
+    city String,
+    state String,
+    zipcode String,
+    country String
 }
 
 entity Upload {
-	name String,
+	name String required,
     description String,
     file AnyBlob
 }
@@ -56,7 +50,7 @@ enum FieldServiceStatus {
 }
 
 entity FieldServiceType {
-	name String,
+	name String required,
 	description String
 }
 
@@ -66,23 +60,26 @@ entity FieldServiceRequest {
     startDate LocalDate,
     finishDate LocalDate,
     description String,
-    total Double
+    total Double,
+    street String,
+    city String,
+    state String,
+    zipcode String,
+    country String
 }
 
 entity User
 
 relationship OneToMany {
-	Contact{phoneNumbers} to ContactPhone,
-    Contact{emailAddresses} to ContactEmail,
-    FieldServiceType to FieldServiceRequest
-    FieldServiceRequest{documents} to Upload
+    FieldServiceType{requestType(name)} to FieldServiceRequest,
+    FieldServiceRequest{documents(name)} to Upload,
+    Site{otherContacts(firstName)} to Contact
 }
 
 relationship OneToOne {
-	Site{primaryContact} to Contact,
-    Site{otherContacts} to Contact,
-    Contact to Address,
-    Site to Address
-    FieldServiceRequest{requestor} to Contact
+	Site{primaryContact(firstName)} to Contact,
+    FieldServiceRequest{requestor(firstName)} to Contact
 }
 
+paginate Contact with infinite-scroll
+paginate FieldServiceRequest with infinite-scroll

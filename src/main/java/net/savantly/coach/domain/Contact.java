@@ -1,17 +1,16 @@
 package net.savantly.coach.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import net.savantly.coach.domain.enumeration.ContactStatus;
@@ -31,17 +30,26 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
+    @NotNull
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @NotNull
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email_address")
+    private String emailAddress;
 
     @Column(name = "dob")
     private LocalDate dob;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private ContactStatus status;
 
     @Column(name = "company_name")
@@ -62,16 +70,25 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
     @Column(name = "department")
     private String department;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Address address;
+    @Column(name = "street")
+    private String street;
 
-    @OneToMany(mappedBy = "contact")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ContactPhone> phoneNumbers = new HashSet<>();
-    @OneToMany(mappedBy = "contact")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ContactEmail> emailAddresses = new HashSet<>();
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "zipcode")
+    private String zipcode;
+
+    @Column(name = "country")
+    private String country;
+
+    @ManyToOne
+    @JsonIgnoreProperties("otherContacts")
+    private Site site;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -105,6 +122,32 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Contact phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public Contact emailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+        return this;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public LocalDate getDob() {
@@ -211,67 +254,82 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
         this.department = department;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public Contact address(Address address) {
-        this.address = address;
+    public Contact street(String street) {
+        this.street = street;
         return this;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public Set<ContactPhone> getPhoneNumbers() {
-        return phoneNumbers;
+    public String getCity() {
+        return city;
     }
 
-    public Contact phoneNumbers(Set<ContactPhone> contactPhones) {
-        this.phoneNumbers = contactPhones;
+    public Contact city(String city) {
+        this.city = city;
         return this;
     }
 
-    public Contact addPhoneNumbers(ContactPhone contactPhone) {
-        this.phoneNumbers.add(contactPhone);
-        contactPhone.setContact(this);
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public Contact state(String state) {
+        this.state = state;
         return this;
     }
 
-    public Contact removePhoneNumbers(ContactPhone contactPhone) {
-        this.phoneNumbers.remove(contactPhone);
-        contactPhone.setContact(null);
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public Contact zipcode(String zipcode) {
+        this.zipcode = zipcode;
         return this;
     }
 
-    public void setPhoneNumbers(Set<ContactPhone> contactPhones) {
-        this.phoneNumbers = contactPhones;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public Set<ContactEmail> getEmailAddresses() {
-        return emailAddresses;
+    public String getCountry() {
+        return country;
     }
 
-    public Contact emailAddresses(Set<ContactEmail> contactEmails) {
-        this.emailAddresses = contactEmails;
+    public Contact country(String country) {
+        this.country = country;
         return this;
     }
 
-    public Contact addEmailAddresses(ContactEmail contactEmail) {
-        this.emailAddresses.add(contactEmail);
-        contactEmail.setContact(this);
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public Contact site(Site site) {
+        this.site = site;
         return this;
     }
 
-    public Contact removeEmailAddresses(ContactEmail contactEmail) {
-        this.emailAddresses.remove(contactEmail);
-        contactEmail.setContact(null);
-        return this;
-    }
-
-    public void setEmailAddresses(Set<ContactEmail> contactEmails) {
-        this.emailAddresses = contactEmails;
+    public void setSite(Site site) {
+        this.site = site;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -301,6 +359,8 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", emailAddress='" + getEmailAddress() + "'" +
             ", dob='" + getDob() + "'" +
             ", status='" + getStatus() + "'" +
             ", companyName='" + getCompanyName() + "'" +
@@ -309,6 +369,11 @@ public class Contact extends AbstractAuditingEntity implements Serializable {
             ", linkedIn='" + getLinkedIn() + "'" +
             ", fax='" + getFax() + "'" +
             ", department='" + getDepartment() + "'" +
+            ", street='" + getStreet() + "'" +
+            ", city='" + getCity() + "'" +
+            ", state='" + getState() + "'" +
+            ", zipcode='" + getZipcode() + "'" +
+            ", country='" + getCountry() + "'" +
             "}";
     }
 }

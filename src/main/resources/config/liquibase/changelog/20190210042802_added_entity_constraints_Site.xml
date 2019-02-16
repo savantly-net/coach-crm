@@ -14,17 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="contact"/>
 
-        <addForeignKeyConstraint baseColumnNames="other_contacts_id"
-                                 baseTableName="site"
-                                 constraintName="fk_site_other_contacts_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="contact"/>
-
-        <addForeignKeyConstraint baseColumnNames="address_id"
-                                 baseTableName="site"
-                                 constraintName="fk_site_address_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="address"/>
-
     </changeSet>
 </databaseChangeLog>

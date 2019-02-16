@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -64,6 +66,21 @@ public class FieldServiceRequestResourceIntTest {
 
     private static final Double DEFAULT_TOTAL = 1D;
     private static final Double UPDATED_TOTAL = 2D;
+
+    private static final String DEFAULT_STREET = "AAAAAAAAAA";
+    private static final String UPDATED_STREET = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CITY = "AAAAAAAAAA";
+    private static final String UPDATED_CITY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STATE = "AAAAAAAAAA";
+    private static final String UPDATED_STATE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ZIPCODE = "AAAAAAAAAA";
+    private static final String UPDATED_ZIPCODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY = "BBBBBBBBBB";
 
     @Autowired
     private FieldServiceRequestRepository fieldServiceRequestRepository;
@@ -120,7 +137,12 @@ public class FieldServiceRequestResourceIntTest {
             .startDate(DEFAULT_START_DATE)
             .finishDate(DEFAULT_FINISH_DATE)
             .description(DEFAULT_DESCRIPTION)
-            .total(DEFAULT_TOTAL);
+            .total(DEFAULT_TOTAL)
+            .street(DEFAULT_STREET)
+            .city(DEFAULT_CITY)
+            .state(DEFAULT_STATE)
+            .zipcode(DEFAULT_ZIPCODE)
+            .country(DEFAULT_COUNTRY);
         return fieldServiceRequest;
     }
 
@@ -150,6 +172,11 @@ public class FieldServiceRequestResourceIntTest {
         assertThat(testFieldServiceRequest.getFinishDate()).isEqualTo(DEFAULT_FINISH_DATE);
         assertThat(testFieldServiceRequest.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testFieldServiceRequest.getTotal()).isEqualTo(DEFAULT_TOTAL);
+        assertThat(testFieldServiceRequest.getStreet()).isEqualTo(DEFAULT_STREET);
+        assertThat(testFieldServiceRequest.getCity()).isEqualTo(DEFAULT_CITY);
+        assertThat(testFieldServiceRequest.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testFieldServiceRequest.getZipcode()).isEqualTo(DEFAULT_ZIPCODE);
+        assertThat(testFieldServiceRequest.getCountry()).isEqualTo(DEFAULT_COUNTRY);
 
         // Validate the FieldServiceRequest in Elasticsearch
         verify(mockFieldServiceRequestSearchRepository, times(1)).save(testFieldServiceRequest);
@@ -193,7 +220,12 @@ public class FieldServiceRequestResourceIntTest {
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));
+            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())))
+            .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
+            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].zipcode").value(hasItem(DEFAULT_ZIPCODE.toString())))
+            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())));
     }
     
     @Test
@@ -212,7 +244,12 @@ public class FieldServiceRequestResourceIntTest {
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.finishDate").value(DEFAULT_FINISH_DATE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()));
+            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()))
+            .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
+            .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.zipcode").value(DEFAULT_ZIPCODE.toString()))
+            .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()));
     }
 
     @Test
@@ -241,7 +278,12 @@ public class FieldServiceRequestResourceIntTest {
             .startDate(UPDATED_START_DATE)
             .finishDate(UPDATED_FINISH_DATE)
             .description(UPDATED_DESCRIPTION)
-            .total(UPDATED_TOTAL);
+            .total(UPDATED_TOTAL)
+            .street(UPDATED_STREET)
+            .city(UPDATED_CITY)
+            .state(UPDATED_STATE)
+            .zipcode(UPDATED_ZIPCODE)
+            .country(UPDATED_COUNTRY);
 
         restFieldServiceRequestMockMvc.perform(put("/api/field-service-requests")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -258,6 +300,11 @@ public class FieldServiceRequestResourceIntTest {
         assertThat(testFieldServiceRequest.getFinishDate()).isEqualTo(UPDATED_FINISH_DATE);
         assertThat(testFieldServiceRequest.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testFieldServiceRequest.getTotal()).isEqualTo(UPDATED_TOTAL);
+        assertThat(testFieldServiceRequest.getStreet()).isEqualTo(UPDATED_STREET);
+        assertThat(testFieldServiceRequest.getCity()).isEqualTo(UPDATED_CITY);
+        assertThat(testFieldServiceRequest.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testFieldServiceRequest.getZipcode()).isEqualTo(UPDATED_ZIPCODE);
+        assertThat(testFieldServiceRequest.getCountry()).isEqualTo(UPDATED_COUNTRY);
 
         // Validate the FieldServiceRequest in Elasticsearch
         verify(mockFieldServiceRequestSearchRepository, times(1)).save(testFieldServiceRequest);
@@ -310,8 +357,8 @@ public class FieldServiceRequestResourceIntTest {
     public void searchFieldServiceRequest() throws Exception {
         // Initialize the database
         fieldServiceRequestRepository.saveAndFlush(fieldServiceRequest);
-        when(mockFieldServiceRequestSearchRepository.search(queryStringQuery("id:" + fieldServiceRequest.getId())))
-            .thenReturn(Collections.singletonList(fieldServiceRequest));
+        when(mockFieldServiceRequestSearchRepository.search(queryStringQuery("id:" + fieldServiceRequest.getId()), PageRequest.of(0, 20)))
+            .thenReturn(new PageImpl<>(Collections.singletonList(fieldServiceRequest), PageRequest.of(0, 1), 1));
         // Search the fieldServiceRequest
         restFieldServiceRequestMockMvc.perform(get("/api/_search/field-service-requests?query=id:" + fieldServiceRequest.getId()))
             .andExpect(status().isOk())
@@ -322,7 +369,12 @@ public class FieldServiceRequestResourceIntTest {
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));
+            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())))
+            .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
+            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE)))
+            .andExpect(jsonPath("$.[*].zipcode").value(hasItem(DEFAULT_ZIPCODE)))
+            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)));
     }
 
     @Test

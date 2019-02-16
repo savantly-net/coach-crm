@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -28,7 +29,8 @@ public class FieldServiceType extends AbstractAuditingEntity implements Serializ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -36,7 +38,7 @@ public class FieldServiceType extends AbstractAuditingEntity implements Serializ
 
     @OneToMany(mappedBy = "fieldServiceType")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<FieldServiceRequest> fieldServiceRequests = new HashSet<>();
+    private Set<FieldServiceRequest> requestTypes = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -72,29 +74,29 @@ public class FieldServiceType extends AbstractAuditingEntity implements Serializ
         this.description = description;
     }
 
-    public Set<FieldServiceRequest> getFieldServiceRequests() {
-        return fieldServiceRequests;
+    public Set<FieldServiceRequest> getRequestTypes() {
+        return requestTypes;
     }
 
-    public FieldServiceType fieldServiceRequests(Set<FieldServiceRequest> fieldServiceRequests) {
-        this.fieldServiceRequests = fieldServiceRequests;
+    public FieldServiceType requestTypes(Set<FieldServiceRequest> fieldServiceRequests) {
+        this.requestTypes = fieldServiceRequests;
         return this;
     }
 
-    public FieldServiceType addFieldServiceRequest(FieldServiceRequest fieldServiceRequest) {
-        this.fieldServiceRequests.add(fieldServiceRequest);
+    public FieldServiceType addRequestType(FieldServiceRequest fieldServiceRequest) {
+        this.requestTypes.add(fieldServiceRequest);
         fieldServiceRequest.setFieldServiceType(this);
         return this;
     }
 
-    public FieldServiceType removeFieldServiceRequest(FieldServiceRequest fieldServiceRequest) {
-        this.fieldServiceRequests.remove(fieldServiceRequest);
+    public FieldServiceType removeRequestType(FieldServiceRequest fieldServiceRequest) {
+        this.requestTypes.remove(fieldServiceRequest);
         fieldServiceRequest.setFieldServiceType(null);
         return this;
     }
 
-    public void setFieldServiceRequests(Set<FieldServiceRequest> fieldServiceRequests) {
-        this.fieldServiceRequests = fieldServiceRequests;
+    public void setRequestTypes(Set<FieldServiceRequest> fieldServiceRequests) {
+        this.requestTypes = fieldServiceRequests;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

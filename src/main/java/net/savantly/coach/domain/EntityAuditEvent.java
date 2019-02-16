@@ -23,7 +23,7 @@ public class EntityAuditEvent implements Serializable{
 
     @NotNull
     @Column(name = "entity_id", nullable = false)
-    private Long entityId;
+    private String entityId;
 
     @NotNull
     @Size(max = 255)
@@ -59,11 +59,11 @@ public class EntityAuditEvent implements Serializable{
         this.id = id;
     }
 
-    public Long getEntityId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(Long entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 

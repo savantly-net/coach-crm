@@ -25,14 +25,40 @@
         {
             "fieldName": "total",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
         }
     ],
     "relationships": [
         {
+            "relationshipName": "fieldServiceType",
+            "otherEntityName": "fieldServiceType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
             "relationshipType": "one-to-one",
             "relationshipName": "requestor",
             "otherEntityName": "contact",
-            "otherEntityField": "id",
+            "otherEntityField": "firstName",
             "ownerSide": true,
             "otherEntityRelationshipName": "fieldServiceRequest"
         },
@@ -41,19 +67,12 @@
             "relationshipName": "documents",
             "otherEntityName": "upload",
             "otherEntityRelationshipName": "fieldServiceRequest"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "fieldServiceType",
-            "otherEntityName": "fieldServiceType",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "fieldServiceRequest"
         }
     ],
     "changelogDate": "20190210042806",
     "entityTableName": "field_service_request",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "infinite-scroll",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

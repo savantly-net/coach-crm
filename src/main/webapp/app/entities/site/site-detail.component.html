@@ -9,6 +9,10 @@
                 <dd>
                     <span>{{site.name}}</span>
                 </dd>
+                <dt><span jhiTranslate="coachApp.site.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{site.emailAddress}}</span>
+                </dd>
                 <dt><span jhiTranslate="coachApp.site.phoneNumber">Phone Number</span></dt>
                 <dd>
                     <span>{{site.phoneNumber}}</span>
@@ -29,22 +33,30 @@
                 <dd>
                     <span>{{site.industry}}</span>
                 </dd>
+                <dt><span jhiTranslate="coachApp.site.street">Street</span></dt>
+                <dd>
+                    <span>{{site.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.site.city">City</span></dt>
+                <dd>
+                    <span>{{site.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.site.state">State</span></dt>
+                <dd>
+                    <span>{{site.state}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.site.zipcode">Zipcode</span></dt>
+                <dd>
+                    <span>{{site.zipcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="coachApp.site.country">Country</span></dt>
+                <dd>
+                    <span>{{site.country}}</span>
+                </dd>
                 <dt><span jhiTranslate="coachApp.site.primaryContact">Primary Contact</span></dt>
                 <dd>
                     <div *ngIf="site.primaryContact">
-                        <a [routerLink]="['/contact', site.primaryContact?.id, 'view']">{{site.primaryContact?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="coachApp.site.otherContacts">Other Contacts</span></dt>
-                <dd>
-                    <div *ngIf="site.otherContacts">
-                        <a [routerLink]="['/contact', site.otherContacts?.id, 'view']">{{site.otherContacts?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="coachApp.site.address">Address</span></dt>
-                <dd>
-                    <div *ngIf="site.address">
-                        <a [routerLink]="['/address', site.address?.id, 'view']">{{site.address?.id}}</a>
+                        <a [routerLink]="['/contact', site.primaryContact?.id, 'view']">{{site.primaryContact?.firstName}}</a>
                     </div>
                 </dd>
             </dl>

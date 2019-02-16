@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface EntityAuditEventRepository extends JpaRepository<EntityAuditEvent, Long> {
 
-    List<EntityAuditEvent> findAllByEntityTypeAndEntityId(String entityType, Long entityId);
+    List<EntityAuditEvent> findAllByEntityTypeAndEntityId(String entityType, String entityId);
 
     @Query("SELECT max(a.commitVersion) FROM EntityAuditEvent a where a.entityType = :type and a.entityId = :entityId")
-    Integer findMaxCommitVersion(@Param("type") String type, @Param("entityId") Long entityId);
+    Integer findMaxCommitVersion(@Param("type") String type, @Param("entityId") String entityId);
 
     @Query("SELECT DISTINCT (a.entityType) from EntityAuditEvent a")
     List<String> findAllEntityTypes();

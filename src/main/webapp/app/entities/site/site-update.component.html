@@ -12,7 +12,18 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="coachApp.site.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="site.name" />
+                        [(ngModel)]="site.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.emailAddress" for="field_emailAddress">Email Address</label>
+                    <input type="text" class="form-control" name="emailAddress" id="field_emailAddress"
+                        [(ngModel)]="site.emailAddress" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="coachApp.site.phoneNumber" for="field_phoneNumber">Phone Number</label>
@@ -39,26 +50,37 @@
                     <input type="text" class="form-control" name="industry" id="field_industry"
                         [(ngModel)]="site.industry" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.street" for="field_street">Street</label>
+                    <input type="text" class="form-control" name="street" id="field_street"
+                        [(ngModel)]="site.street" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.city" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                        [(ngModel)]="site.city" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.state" for="field_state">State</label>
+                    <input type="text" class="form-control" name="state" id="field_state"
+                        [(ngModel)]="site.state" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.zipcode" for="field_zipcode">Zipcode</label>
+                    <input type="text" class="form-control" name="zipcode" id="field_zipcode"
+                        [(ngModel)]="site.zipcode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coachApp.site.country" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                        [(ngModel)]="site.country" />
+                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="coachApp.site.primaryContact" for="field_primaryContact">Primary Contact</label>
                     <select class="form-control" id="field_primaryContact" name="primaryContact" [(ngModel)]="site.primaryContact">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="contactOption.id === site.primaryContact?.id ? site.primaryContact : contactOption" *ngFor="let contactOption of primarycontacts; trackBy: trackContactById">{{contactOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="coachApp.site.otherContacts" for="field_otherContacts">Other Contacts</label>
-                    <select class="form-control" id="field_otherContacts" name="otherContacts" [(ngModel)]="site.otherContacts">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="contactOption.id === site.otherContacts?.id ? site.otherContacts : contactOption" *ngFor="let contactOption of othercontacts; trackBy: trackContactById">{{contactOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="coachApp.site.address" for="field_address">Address</label>
-                    <select class="form-control" id="field_address" name="address" [(ngModel)]="site.address">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="addressOption.id === site.address?.id ? site.address : addressOption" *ngFor="let addressOption of addresses; trackBy: trackAddressById">{{addressOption.id}}</option>
+                        <option [ngValue]="contactOption.id === site.primaryContact?.id ? site.primaryContact : contactOption" *ngFor="let contactOption of primarycontacts; trackBy: trackContactById">{{contactOption.firstName}}</option>
                     </select>
                 </div>
             </div>

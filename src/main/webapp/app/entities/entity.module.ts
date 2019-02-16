@@ -5,16 +5,44 @@ import { RouterModule } from '@angular/router';
     imports: [
         RouterModule.forChild([
             {
-                path: 'contact-phone',
-                loadChildren: './contact-phone/contact-phone.module#CoachContactPhoneModule'
+                path: 'site',
+                loadChildren: './site/site.module#CoachSiteModule'
             },
             {
-                path: 'contact-email',
-                loadChildren: './contact-email/contact-email.module#CoachContactEmailModule'
+                path: 'contact',
+                loadChildren: './contact/contact.module#CoachContactModule'
             },
             {
-                path: 'address',
-                loadChildren: './address/address.module#CoachAddressModule'
+                path: 'upload',
+                loadChildren: './upload/upload.module#CoachUploadModule'
+            },
+            {
+                path: 'field-service-type',
+                loadChildren: './field-service-type/field-service-type.module#CoachFieldServiceTypeModule'
+            },
+            {
+                path: 'field-service-request',
+                loadChildren: './field-service-request/field-service-request.module#CoachFieldServiceRequestModule'
+            },
+            {
+                path: 'site',
+                loadChildren: './site/site.module#CoachSiteModule'
+            },
+            {
+                path: 'contact',
+                loadChildren: './contact/contact.module#CoachContactModule'
+            },
+            {
+                path: 'upload',
+                loadChildren: './upload/upload.module#CoachUploadModule'
+            },
+            {
+                path: 'field-service-type',
+                loadChildren: './field-service-type/field-service-type.module#CoachFieldServiceTypeModule'
+            },
+            {
+                path: 'field-service-request',
+                loadChildren: './field-service-request/field-service-request.module#CoachFieldServiceRequestModule'
             },
             {
                 path: 'site',

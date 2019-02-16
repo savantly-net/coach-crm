@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +49,7 @@ public class SiteResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/sites")
-    public ResponseEntity<Site> createSite(@RequestBody Site site) throws URISyntaxException {
+    public ResponseEntity<Site> createSite(@Valid @RequestBody Site site) throws URISyntaxException {
         log.debug("REST request to save Site : {}", site);
         if (site.getId() != null) {
             throw new BadRequestAlertException("A new site cannot already have an ID", ENTITY_NAME, "idexists");
@@ -70,7 +71,7 @@ public class SiteResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/sites")
-    public ResponseEntity<Site> updateSite(@RequestBody Site site) throws URISyntaxException {
+    public ResponseEntity<Site> updateSite(@Valid @RequestBody Site site) throws URISyntaxException {
         log.debug("REST request to update Site : {}", site);
         if (site.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

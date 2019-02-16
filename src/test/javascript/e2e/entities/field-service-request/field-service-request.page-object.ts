@@ -32,8 +32,13 @@ export class FieldServiceRequestUpdatePage {
     finishDateInput = element(by.id('field_finishDate'));
     descriptionInput = element(by.id('field_description'));
     totalInput = element(by.id('field_total'));
-    requestorSelect = element(by.id('field_requestor'));
+    streetInput = element(by.id('field_street'));
+    cityInput = element(by.id('field_city'));
+    stateInput = element(by.id('field_state'));
+    zipcodeInput = element(by.id('field_zipcode'));
+    countryInput = element(by.id('field_country'));
     fieldServiceTypeSelect = element(by.id('field_fieldServiceType'));
+    requestorSelect = element(by.id('field_requestor'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -94,23 +99,44 @@ export class FieldServiceRequestUpdatePage {
         return this.totalInput.getAttribute('value');
     }
 
-    async requestorSelectLastOption() {
-        await this.requestorSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
+    async setStreetInput(street) {
+        await this.streetInput.sendKeys(street);
     }
 
-    async requestorSelectOption(option) {
-        await this.requestorSelect.sendKeys(option);
+    async getStreetInput() {
+        return this.streetInput.getAttribute('value');
     }
 
-    getRequestorSelect(): ElementFinder {
-        return this.requestorSelect;
+    async setCityInput(city) {
+        await this.cityInput.sendKeys(city);
     }
 
-    async getRequestorSelectedOption() {
-        return this.requestorSelect.element(by.css('option:checked')).getText();
+    async getCityInput() {
+        return this.cityInput.getAttribute('value');
+    }
+
+    async setStateInput(state) {
+        await this.stateInput.sendKeys(state);
+    }
+
+    async getStateInput() {
+        return this.stateInput.getAttribute('value');
+    }
+
+    async setZipcodeInput(zipcode) {
+        await this.zipcodeInput.sendKeys(zipcode);
+    }
+
+    async getZipcodeInput() {
+        return this.zipcodeInput.getAttribute('value');
+    }
+
+    async setCountryInput(country) {
+        await this.countryInput.sendKeys(country);
+    }
+
+    async getCountryInput() {
+        return this.countryInput.getAttribute('value');
     }
 
     async fieldServiceTypeSelectLastOption() {
@@ -130,6 +156,25 @@ export class FieldServiceRequestUpdatePage {
 
     async getFieldServiceTypeSelectedOption() {
         return this.fieldServiceTypeSelect.element(by.css('option:checked')).getText();
+    }
+
+    async requestorSelectLastOption() {
+        await this.requestorSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async requestorSelectOption(option) {
+        await this.requestorSelect.sendKeys(option);
+    }
+
+    getRequestorSelect(): ElementFinder {
+        return this.requestorSelect;
+    }
+
+    async getRequestorSelectedOption() {
+        return this.requestorSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

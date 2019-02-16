@@ -8,17 +8,17 @@
     -->
     <changeSet id="20190210042806-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="requestor_id"
-                                 baseTableName="field_service_request"
-                                 constraintName="fk_field_service_request_requestor_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="contact"/>
-
         <addForeignKeyConstraint baseColumnNames="field_service_type_id"
                                  baseTableName="field_service_request"
                                  constraintName="fk_field_service_request_field_service_type_id"
                                  referencedColumnNames="id"
                                  referencedTableName="field_service_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="requestor_id"
+                                 baseTableName="field_service_request"
+                                 constraintName="fk_field_service_request_requestor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contact"/>
 
     </changeSet>
 </databaseChangeLog>

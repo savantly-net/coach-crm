@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -53,6 +55,12 @@ public class ContactResourceIntTest {
     private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL_ADDRESS = "BBBBBBBBBB";
+
     private static final LocalDate DEFAULT_DOB = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DOB = LocalDate.now(ZoneId.systemDefault());
 
@@ -76,6 +84,21 @@ public class ContactResourceIntTest {
 
     private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
     private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STREET = "AAAAAAAAAA";
+    private static final String UPDATED_STREET = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CITY = "AAAAAAAAAA";
+    private static final String UPDATED_CITY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STATE = "AAAAAAAAAA";
+    private static final String UPDATED_STATE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ZIPCODE = "AAAAAAAAAA";
+    private static final String UPDATED_ZIPCODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY = "BBBBBBBBBB";
 
     @Autowired
     private ContactRepository contactRepository;
@@ -129,6 +152,8 @@ public class ContactResourceIntTest {
         Contact contact = new Contact()
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
+            .phoneNumber(DEFAULT_PHONE_NUMBER)
+            .emailAddress(DEFAULT_EMAIL_ADDRESS)
             .dob(DEFAULT_DOB)
             .status(DEFAULT_STATUS)
             .companyName(DEFAULT_COMPANY_NAME)
@@ -136,7 +161,12 @@ public class ContactResourceIntTest {
             .position(DEFAULT_POSITION)
             .linkedIn(DEFAULT_LINKED_IN)
             .fax(DEFAULT_FAX)
-            .department(DEFAULT_DEPARTMENT);
+            .department(DEFAULT_DEPARTMENT)
+            .street(DEFAULT_STREET)
+            .city(DEFAULT_CITY)
+            .state(DEFAULT_STATE)
+            .zipcode(DEFAULT_ZIPCODE)
+            .country(DEFAULT_COUNTRY);
         return contact;
     }
 
@@ -162,6 +192,8 @@ public class ContactResourceIntTest {
         Contact testContact = contactList.get(contactList.size() - 1);
         assertThat(testContact.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testContact.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testContact.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testContact.getEmailAddress()).isEqualTo(DEFAULT_EMAIL_ADDRESS);
         assertThat(testContact.getDob()).isEqualTo(DEFAULT_DOB);
         assertThat(testContact.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testContact.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
@@ -170,6 +202,11 @@ public class ContactResourceIntTest {
         assertThat(testContact.getLinkedIn()).isEqualTo(DEFAULT_LINKED_IN);
         assertThat(testContact.getFax()).isEqualTo(DEFAULT_FAX);
         assertThat(testContact.getDepartment()).isEqualTo(DEFAULT_DEPARTMENT);
+        assertThat(testContact.getStreet()).isEqualTo(DEFAULT_STREET);
+        assertThat(testContact.getCity()).isEqualTo(DEFAULT_CITY);
+        assertThat(testContact.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testContact.getZipcode()).isEqualTo(DEFAULT_ZIPCODE);
+        assertThat(testContact.getCountry()).isEqualTo(DEFAULT_COUNTRY);
 
         // Validate the Contact in Elasticsearch
         verify(mockContactSearchRepository, times(1)).save(testContact);
@@ -199,6 +236,60 @@ public class ContactResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFirstNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contactRepository.findAll().size();
+        // set the field null
+        contact.setFirstName(null);
+
+        // Create the Contact, which fails.
+
+        restContactMockMvc.perform(post("/api/contacts")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .andExpect(status().isBadRequest());
+
+        List<Contact> contactList = contactRepository.findAll();
+        assertThat(contactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLastNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contactRepository.findAll().size();
+        // set the field null
+        contact.setLastName(null);
+
+        // Create the Contact, which fails.
+
+        restContactMockMvc.perform(post("/api/contacts")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .andExpect(status().isBadRequest());
+
+        List<Contact> contactList = contactRepository.findAll();
+        assertThat(contactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contactRepository.findAll().size();
+        // set the field null
+        contact.setStatus(null);
+
+        // Create the Contact, which fails.
+
+        restContactMockMvc.perform(post("/api/contacts")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .andExpect(status().isBadRequest());
+
+        List<Contact> contactList = contactRepository.findAll();
+        assertThat(contactList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllContacts() throws Exception {
         // Initialize the database
         contactRepository.saveAndFlush(contact);
@@ -210,6 +301,8 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contact.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
@@ -217,7 +310,12 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
             .andExpect(jsonPath("$.[*].linkedIn").value(hasItem(DEFAULT_LINKED_IN.toString())))
             .andExpect(jsonPath("$.[*].fax").value(hasItem(DEFAULT_FAX.toString())))
-            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.toString())));
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.toString())))
+            .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
+            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].zipcode").value(hasItem(DEFAULT_ZIPCODE.toString())))
+            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())));
     }
     
     @Test
@@ -233,6 +331,8 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.id").value(contact.getId().intValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
+            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.toString()))
+            .andExpect(jsonPath("$.emailAddress").value(DEFAULT_EMAIL_ADDRESS.toString()))
             .andExpect(jsonPath("$.dob").value(DEFAULT_DOB.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
@@ -240,7 +340,12 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
             .andExpect(jsonPath("$.linkedIn").value(DEFAULT_LINKED_IN.toString()))
             .andExpect(jsonPath("$.fax").value(DEFAULT_FAX.toString()))
-            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT.toString()));
+            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT.toString()))
+            .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
+            .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.zipcode").value(DEFAULT_ZIPCODE.toString()))
+            .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()));
     }
 
     @Test
@@ -266,6 +371,8 @@ public class ContactResourceIntTest {
         updatedContact
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .emailAddress(UPDATED_EMAIL_ADDRESS)
             .dob(UPDATED_DOB)
             .status(UPDATED_STATUS)
             .companyName(UPDATED_COMPANY_NAME)
@@ -273,7 +380,12 @@ public class ContactResourceIntTest {
             .position(UPDATED_POSITION)
             .linkedIn(UPDATED_LINKED_IN)
             .fax(UPDATED_FAX)
-            .department(UPDATED_DEPARTMENT);
+            .department(UPDATED_DEPARTMENT)
+            .street(UPDATED_STREET)
+            .city(UPDATED_CITY)
+            .state(UPDATED_STATE)
+            .zipcode(UPDATED_ZIPCODE)
+            .country(UPDATED_COUNTRY);
 
         restContactMockMvc.perform(put("/api/contacts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -286,6 +398,8 @@ public class ContactResourceIntTest {
         Contact testContact = contactList.get(contactList.size() - 1);
         assertThat(testContact.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testContact.getLastName()).isEqualTo(UPDATED_LAST_NAME);
+        assertThat(testContact.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testContact.getEmailAddress()).isEqualTo(UPDATED_EMAIL_ADDRESS);
         assertThat(testContact.getDob()).isEqualTo(UPDATED_DOB);
         assertThat(testContact.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testContact.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
@@ -294,6 +408,11 @@ public class ContactResourceIntTest {
         assertThat(testContact.getLinkedIn()).isEqualTo(UPDATED_LINKED_IN);
         assertThat(testContact.getFax()).isEqualTo(UPDATED_FAX);
         assertThat(testContact.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
+        assertThat(testContact.getStreet()).isEqualTo(UPDATED_STREET);
+        assertThat(testContact.getCity()).isEqualTo(UPDATED_CITY);
+        assertThat(testContact.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testContact.getZipcode()).isEqualTo(UPDATED_ZIPCODE);
+        assertThat(testContact.getCountry()).isEqualTo(UPDATED_COUNTRY);
 
         // Validate the Contact in Elasticsearch
         verify(mockContactSearchRepository, times(1)).save(testContact);
@@ -346,8 +465,8 @@ public class ContactResourceIntTest {
     public void searchContact() throws Exception {
         // Initialize the database
         contactRepository.saveAndFlush(contact);
-        when(mockContactSearchRepository.search(queryStringQuery("id:" + contact.getId())))
-            .thenReturn(Collections.singletonList(contact));
+        when(mockContactSearchRepository.search(queryStringQuery("id:" + contact.getId()), PageRequest.of(0, 20)))
+            .thenReturn(new PageImpl<>(Collections.singletonList(contact), PageRequest.of(0, 1), 1));
         // Search the contact
         restContactMockMvc.perform(get("/api/_search/contacts?query=id:" + contact.getId()))
             .andExpect(status().isOk())
@@ -355,6 +474,8 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contact.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
+            .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS)))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME)))
@@ -362,7 +483,12 @@ public class ContactResourceIntTest {
             .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION)))
             .andExpect(jsonPath("$.[*].linkedIn").value(hasItem(DEFAULT_LINKED_IN)))
             .andExpect(jsonPath("$.[*].fax").value(hasItem(DEFAULT_FAX)))
-            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT)));
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT)))
+            .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
+            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE)))
+            .andExpect(jsonPath("$.[*].zipcode").value(hasItem(DEFAULT_ZIPCODE)))
+            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)));
     }
 
     @Test

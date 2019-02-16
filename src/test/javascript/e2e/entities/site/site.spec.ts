@@ -41,21 +41,31 @@ describe('Site e2e test', () => {
         await siteComponentsPage.clickOnCreateButton();
         await promise.all([
             siteUpdatePage.setNameInput('name'),
+            siteUpdatePage.setEmailAddressInput('emailAddress'),
             siteUpdatePage.setPhoneNumberInput('phoneNumber'),
             siteUpdatePage.setAltPhoneNumberInput('altPhoneNumber'),
             siteUpdatePage.setFaxInput('fax'),
             siteUpdatePage.setWebsiteInput('website'),
             siteUpdatePage.setIndustryInput('industry'),
-            siteUpdatePage.primaryContactSelectLastOption(),
-            siteUpdatePage.otherContactsSelectLastOption(),
-            siteUpdatePage.addressSelectLastOption()
+            siteUpdatePage.setStreetInput('street'),
+            siteUpdatePage.setCityInput('city'),
+            siteUpdatePage.setStateInput('state'),
+            siteUpdatePage.setZipcodeInput('zipcode'),
+            siteUpdatePage.setCountryInput('country'),
+            siteUpdatePage.primaryContactSelectLastOption()
         ]);
         expect(await siteUpdatePage.getNameInput()).to.eq('name');
+        expect(await siteUpdatePage.getEmailAddressInput()).to.eq('emailAddress');
         expect(await siteUpdatePage.getPhoneNumberInput()).to.eq('phoneNumber');
         expect(await siteUpdatePage.getAltPhoneNumberInput()).to.eq('altPhoneNumber');
         expect(await siteUpdatePage.getFaxInput()).to.eq('fax');
         expect(await siteUpdatePage.getWebsiteInput()).to.eq('website');
         expect(await siteUpdatePage.getIndustryInput()).to.eq('industry');
+        expect(await siteUpdatePage.getStreetInput()).to.eq('street');
+        expect(await siteUpdatePage.getCityInput()).to.eq('city');
+        expect(await siteUpdatePage.getStateInput()).to.eq('state');
+        expect(await siteUpdatePage.getZipcodeInput()).to.eq('zipcode');
+        expect(await siteUpdatePage.getCountryInput()).to.eq('country');
         await siteUpdatePage.save();
         expect(await siteUpdatePage.getSaveButton().isPresent()).to.be.false;
 

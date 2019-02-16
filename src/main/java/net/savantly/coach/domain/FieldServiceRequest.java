@@ -51,6 +51,25 @@ public class FieldServiceRequest extends AbstractAuditingEntity implements Seria
     @Column(name = "total")
     private Double total;
 
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "zipcode")
+    private String zipcode;
+
+    @Column(name = "country")
+    private String country;
+
+    @ManyToOne
+    @JsonIgnoreProperties("requestTypes")
+    private FieldServiceType fieldServiceType;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Contact requestor;
@@ -58,10 +77,6 @@ public class FieldServiceRequest extends AbstractAuditingEntity implements Seria
     @OneToMany(mappedBy = "fieldServiceRequest")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Upload> documents = new HashSet<>();
-    @ManyToOne
-    @JsonIgnoreProperties("fieldServiceRequests")
-    private FieldServiceType fieldServiceType;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -149,6 +164,84 @@ public class FieldServiceRequest extends AbstractAuditingEntity implements Seria
         this.total = total;
     }
 
+    public String getStreet() {
+        return street;
+    }
+
+    public FieldServiceRequest street(String street) {
+        this.street = street;
+        return this;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public FieldServiceRequest city(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public FieldServiceRequest state(String state) {
+        this.state = state;
+        return this;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public FieldServiceRequest zipcode(String zipcode) {
+        this.zipcode = zipcode;
+        return this;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public FieldServiceRequest country(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public FieldServiceType getFieldServiceType() {
+        return fieldServiceType;
+    }
+
+    public FieldServiceRequest fieldServiceType(FieldServiceType fieldServiceType) {
+        this.fieldServiceType = fieldServiceType;
+        return this;
+    }
+
+    public void setFieldServiceType(FieldServiceType fieldServiceType) {
+        this.fieldServiceType = fieldServiceType;
+    }
+
     public Contact getRequestor() {
         return requestor;
     }
@@ -186,19 +279,6 @@ public class FieldServiceRequest extends AbstractAuditingEntity implements Seria
     public void setDocuments(Set<Upload> uploads) {
         this.documents = uploads;
     }
-
-    public FieldServiceType getFieldServiceType() {
-        return fieldServiceType;
-    }
-
-    public FieldServiceRequest fieldServiceType(FieldServiceType fieldServiceType) {
-        this.fieldServiceType = fieldServiceType;
-        return this;
-    }
-
-    public void setFieldServiceType(FieldServiceType fieldServiceType) {
-        this.fieldServiceType = fieldServiceType;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -231,6 +311,11 @@ public class FieldServiceRequest extends AbstractAuditingEntity implements Seria
             ", finishDate='" + getFinishDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", total=" + getTotal() +
+            ", street='" + getStreet() + "'" +
+            ", city='" + getCity() + "'" +
+            ", state='" + getState() + "'" +
+            ", zipcode='" + getZipcode() + "'" +
+            ", country='" + getCountry() + "'" +
             "}";
     }
 }

@@ -42,6 +42,8 @@ describe('Contact e2e test', () => {
         await promise.all([
             contactUpdatePage.setFirstNameInput('firstName'),
             contactUpdatePage.setLastNameInput('lastName'),
+            contactUpdatePage.setPhoneNumberInput('phoneNumber'),
+            contactUpdatePage.setEmailAddressInput('emailAddress'),
             contactUpdatePage.setDobInput('2000-12-31'),
             contactUpdatePage.statusSelectLastOption(),
             contactUpdatePage.setCompanyNameInput('companyName'),
@@ -50,10 +52,17 @@ describe('Contact e2e test', () => {
             contactUpdatePage.setLinkedInInput('linkedIn'),
             contactUpdatePage.setFaxInput('fax'),
             contactUpdatePage.setDepartmentInput('department'),
-            contactUpdatePage.addressSelectLastOption()
+            contactUpdatePage.setStreetInput('street'),
+            contactUpdatePage.setCityInput('city'),
+            contactUpdatePage.setStateInput('state'),
+            contactUpdatePage.setZipcodeInput('zipcode'),
+            contactUpdatePage.setCountryInput('country'),
+            contactUpdatePage.siteSelectLastOption()
         ]);
         expect(await contactUpdatePage.getFirstNameInput()).to.eq('firstName');
         expect(await contactUpdatePage.getLastNameInput()).to.eq('lastName');
+        expect(await contactUpdatePage.getPhoneNumberInput()).to.eq('phoneNumber');
+        expect(await contactUpdatePage.getEmailAddressInput()).to.eq('emailAddress');
         expect(await contactUpdatePage.getDobInput()).to.eq('2000-12-31');
         expect(await contactUpdatePage.getCompanyNameInput()).to.eq('companyName');
         expect(await contactUpdatePage.getJobRoleInput()).to.eq('jobRole');
@@ -61,6 +70,11 @@ describe('Contact e2e test', () => {
         expect(await contactUpdatePage.getLinkedInInput()).to.eq('linkedIn');
         expect(await contactUpdatePage.getFaxInput()).to.eq('fax');
         expect(await contactUpdatePage.getDepartmentInput()).to.eq('department');
+        expect(await contactUpdatePage.getStreetInput()).to.eq('street');
+        expect(await contactUpdatePage.getCityInput()).to.eq('city');
+        expect(await contactUpdatePage.getStateInput()).to.eq('state');
+        expect(await contactUpdatePage.getZipcodeInput()).to.eq('zipcode');
+        expect(await contactUpdatePage.getCountryInput()).to.eq('country');
         await contactUpdatePage.save();
         expect(await contactUpdatePage.getSaveButton().isPresent()).to.be.false;
 
