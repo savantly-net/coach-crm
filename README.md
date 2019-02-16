@@ -1,4 +1,13 @@
-# coach
+[![Build Status](https://travis-ci.org/savantly-net/coach-crm.svg?branch=master)](https://travis-ci.org/savantly-net/coach-crm)  
+
+# coach  
+
+### Open Source Customer Management  
+
+## Quick Start  
+
+Coming soon! 
+
 
 This application was generated using JHipster 5.8.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.8.1](https://www.jhipster.tech/documentation-archive/v5.8.1).
 
